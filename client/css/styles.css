@@ -1,0 +1,22 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* Header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0e5135;
+}
+
+.header--title {
+  margin-left: 1rem;
+}
+
+.auth--buttons {
+  margin-right: 1rem;
+}
