@@ -14,7 +14,8 @@ Gamified habit tracking application
 We began by brainstorming all the ideas for the application. We came up with this to begin with:
 ![](GHimages/beginnings1.png)
 
-![](GHimages/beginnings2.png)
+**(open image a new tab)**
+![](GHimages/overallcanvasopaque.png)
 
 ## License
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
