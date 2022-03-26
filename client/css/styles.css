@@ -4,19 +4,78 @@
   box-sizing: border-box;
 }
 
+/* Typography */
+html {
+  font-size: 62.5%;
+  background-image: url("../images/pattern-triforce-2x.png"),
+    linear-gradient(to bottom, #023326 0%, #053335 50%, #0a1928 100%);
+  background-position: center center;
+  background-repeat: repeat;
+  background-size: 2.5rem, cover;
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  color: #f4efe5;
+}
+
 /* Header */
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0e5135;
+  background-image: linear-gradient(#0e5135, #0d9263);
+  padding: 0.5rem;
+  /* background-image: linear-gradient(#0d9263, #0e5135); */
+
+  color: #fff;
 }
 
 .header--title {
-  margin-left: 1rem;
+  margin-left: 2rem;
+  text-shadow: 0 0 3px #053335, 0 0 5px #0a1928;
+  transition: all 0.15s;
+}
+.header--title:hover {
+  text-shadow: 1px 1px 2px #ccc, 0 0 1em #ccc, 0 0 0.2em #ccc;
 }
 
-.auth--buttons {
-  margin-right: 1rem;
+.btn--log {
+  background-color: #4aba91;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  outline: none;
+  padding: 1rem;
+  margin-right: 6rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn--log:hover {
+  box-shadow: 0 0 5px 1px black;
+}
+
+@media screen and (max-width: 900px) {
+  .header--title,
+  .btn--log {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Hero Section */
+.hero {
+  border: 3px solid black;
+  margin-top: 8rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
