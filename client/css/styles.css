@@ -8,7 +8,7 @@
 html {
   font-size: 62.5%;
   background-image: url("../images/pattern-triforce-2x.png"),
-    linear-gradient(to bottom, #023326 0%, #053335 50%, #0a1928 100%);
+    linear-gradient(to bottom, #033d2e 0%, #08494d 50%, #0e243a 100%);
   background-position: center center;
   background-repeat: repeat;
   background-size: 2.5rem, cover;
@@ -18,9 +18,16 @@ html {
 
 body {
   font-size: 1.6rem;
-  font-family: "Varela Round", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #f4efe5;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Varela Round", sans-serif;
 }
 
 /* Header */
@@ -38,6 +45,7 @@ header {
 
 .header--title {
   margin-left: 2rem;
+  cursor: pointer;
   text-shadow: 0 0 3px #053335, 0 0 5px #0a1928;
   transition: all 0.15s;
 }
@@ -70,12 +78,133 @@ header {
 
 /* Hero Section */
 .hero {
-  border: 3px solid black;
   margin-top: 8rem;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.hero--content,
+.hero--register {
+  width: 40%;
+}
+
+.hero--content {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.hero--text {
+  max-width: 65ch;
+  text-align: center;
+}
+.pixel--container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Forms */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #4aba91;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #ccc;
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #ccc;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border-radius: 2px;
+  padding: 1rem;
+  background-color: #0e5135;
+  border: none;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  outline: none;
+  transition: all 0.15s;
+}
+
+/* autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: #0e5135;
+  color: #fff;
+  transition: all 5000s ease-in-out 0s;
+}
+
+form input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+  background-color: #00381c;
+}
+
+form input:focus {
+  border: 2px solid #4aba91;
+}
+
+form input[type="submit"] {
+  cursor: pointer;
+  margin-top: 2rem;
+  padding: 1.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 1.8rem;
+  color: black;
+  background-color: #d4ce46;
+  box-shadow: 0 1px 3px 0 rgb(26 24 29 / 12%), 0 1px 2px 0 rgb(26 24 29 / 24%);
+  transition: all 0.15s;
+}
+
+form input[type="submit"]:hover {
+  box-shadow: 0 3px 6px 0 rgb(26 24 29 / 16%), 0 3px 6px 0 rgb(26 24 29 / 24%);
+  background-color: #eee860;
+}
+
+@media screen and (max-width: 1500px) {
+  .hero {
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 950px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero--content {
+    width: 100%;
+  }
+  .hero--register {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 750px) {
+  .hero--register {
+    width: 100%;
+    padding: 2rem;
+  }
 }
