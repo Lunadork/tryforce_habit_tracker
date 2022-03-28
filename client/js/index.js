@@ -14,6 +14,7 @@ function handleRegister(e) {
     password: e.target[2].value,
   };
   console.log(data);
+  registerUser(data);
 }
 
 function handleLogin(e) {
