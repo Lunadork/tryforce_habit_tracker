@@ -10,8 +10,7 @@ CREATE TABLE users
     profilePic int,
     xp bigint,
     xpTarget bigint,
-    level int,
-    salt VARCHAR(500) NOT NULL
+    level int
 );
 
 DROP TABLE IF EXISTS habits;
