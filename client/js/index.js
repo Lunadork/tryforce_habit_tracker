@@ -26,8 +26,6 @@ function handleLogin(e) {
   //kill the request if error in login form
   if (!errorHandler(payload)) return;
 
-  document.location.href = "main.html";
-
   let data =
   {
     username: e.target[0].value,
@@ -48,6 +46,7 @@ function errorHandler({ e, type }) {
     let email = e.target[1];
     let password = e.target[2];
     let confirm = e.target[3];
+    //this can be refactored further if we get bored
     if (password.value.length < 8) {
       password.style.border = failBorderStyle;
       password.nextElementSibling.textContent = "Password must be at least 8 characters!";
@@ -58,9 +57,14 @@ function errorHandler({ e, type }) {
       username.nextElementSibling.textContent = "Username must not be empty!";
       passed = false;
     }
+    if (/@/.test(username.value)) {
+      username.style.border = failBorderStyle;
+      username.nextElementSibling.textContent = "No @ in usernames please!";
+      passed = false;
+    }
     if (!email.value.match(validRegex)) {
       email.style.border = failBorderStyle;
-      email.nextElementSibling.textContent = "Invalid Email!";
+      email.nextElementSibling.textContent = "Invalid email!";
       passed = false;
     }
     if (confirm.value !== password.value) {

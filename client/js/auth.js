@@ -6,7 +6,7 @@ async function registerUser(data)
        headers: {"Content-Type" : "application/json" },
        body: JSON.stringify
        ({
-        "name" : data.username,
+        "username" : data.username,
         "email" : data.email,
         "password" : data.password
        })
@@ -42,19 +42,19 @@ async function userLogin(data)
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify
             ({
-                "name" : data.username,
+                "username" : data.username,
                 "password" : data.password
             })
         };
         const result = await fetch(`${fetchString}/auth/login`, options);
-        const resultdata = await result.json();
+        const resultData = await result.json();
         if (data.err)
         { 
             throw Error("Error: "+ data.err); 
         }
         else
         {
-            loginPart2(resultdata);
+            localStorage.setItem('Bearer', data.token)
         }
     } 
     catch (err) 
@@ -62,10 +62,4 @@ async function userLogin(data)
         console.log(`Login failed for reason: ${err}`);
     }
 
-}
-
-function loginPart2(data)
-{
-    localStorage.setItem('Bearer', data.token)
-    //Move to dashboard.
 }
