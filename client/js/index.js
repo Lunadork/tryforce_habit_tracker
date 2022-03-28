@@ -6,8 +6,11 @@ login.addEventListener("submit", handleLogin);
 
 function handleRegister(e) {
   e.preventDefault();
+
   let payload = { e: e, type: "register" };
-  errorHandler(payload);
+  //kill the request if error in registration form
+  if (!errorHandler(payload)) return;
+
   let data = {
     username: e.target[0].value,
     email: e.target[1].value,
@@ -20,7 +23,8 @@ function handleLogin(e) {
   e.preventDefault();
   let payload = { e: e, type: "login" };
 
-  errorHandler(payload);
+  //kill the request if error in login form
+  if (!errorHandler(payload)) return;
 
   document.location.href = "main.html";
 
@@ -35,40 +39,49 @@ function handleLogin(e) {
 }
 
 function errorHandler({ e, type }) {
+  const failBorderStyle = "3px solid tomato";
   let validRegex =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   let username = e.target[0];
+  let passed = true;
   if (type == "register") {
     let email = e.target[1];
     let password = e.target[2];
     let confirm = e.target[3];
     if (password.value.length < 8) {
-      password.style.border = "3px solid tomato";
-      password.nextElementSibling.innerHTML =
-        "Password must be at least 8 characters!";
+      password.style.border = failBorderStyle;
+      password.nextElementSibling.textContent = "Password must be at least 8 characters!";
+      passed = false;
     }
     if (username.value.length == 0) {
-      username.style.border = "3px solid tomato";
-      username.nextElementSibling.innerHTML = "Username must not be empty!";
+      username.style.border = failBorderStyle;
+      username.nextElementSibling.textContent = "Username must not be empty!";
+      passed = false;
     }
     if (!email.value.match(validRegex)) {
-      email.style.border = "3px solid tomato";
-      email.nextElementSibling.innerHTML = "Invalid Email!";
+      email.style.border = failBorderStyle;
+      email.nextElementSibling.textContent = "Invalid Email!";
+      passed = false;
     }
     if (confirm.value !== password.value) {
-      confirm.style.border = "3px solid tomato";
-      confirm.nextElementSibling.innerHTML = "Passwords Must Match!";
+      confirm.style.border = failBorderStyle;
+      confirm.nextElementSibling.textContent = "Passwords must match!";
+      passed = false;
     }
+    return passed;
+  //handle login form
   } else {
     let password = e.target[1];
     if (password.value.length == 0) {
-      password.style.border = "3px solid tomato";
-      password.nextElementSibling.innerHTML = "Password must not be empty!";
+      password.style.border = failBorderStyle;
+      password.nextElementSibling.textContent = "Password must not be empty!";
+      passed = false;
     }
     if (username.value.length == 0) {
-      username.style.border = "3px solid tomato";
-      username.nextElementSibling.innerHTML =
-        "Username/Email must not be empty!";
+      username.style.border = failBorderStyle;
+      username.nextElementSibling.textContent = "Username/Email must not be empty!";
+      passed = false;
     }
+    return passed;
   }
 }
