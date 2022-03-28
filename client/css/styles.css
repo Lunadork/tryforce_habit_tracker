@@ -261,6 +261,11 @@ form input[type="submit"]:hover {
   font-weight: bold;
 }
 
+/* .modal--header {
+  display: flex;
+  justify-content: space-between;
+} */
+
 @media screen and (max-width: 950px) {
   .modal {
     height: 50%;
@@ -270,7 +275,7 @@ form input[type="submit"]:hover {
 @media screen and (min-height: 900px) and (min-width: 1050px) {
   .modal {
     height: 50%;
-    width: 55%;
+    width: 40%;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -278,6 +283,18 @@ form input[type="submit"]:hover {
   }
 }
 
+.modal--main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.modal--content img {
+  width: 30%;
+  height: 100px;
+  margin-right: 1rem;
+}
 /* Footer */
 
 footer {
@@ -304,12 +321,14 @@ footer p {
 
 .profile {
   background-color: #00381c;
-  padding: 1rem;
+  width: 20%;
+  padding: 0.5rem;
+  margin-top: 1rem;
 }
 
 .profile--card {
   border: 2px solid black;
-  width: 18%;
+  width: 100%;
   overflow: hidden;
   background-color: #0e5135;
 }
@@ -356,4 +375,32 @@ footer p {
   height: 100%;
   text-align: center;
   z-index: 5;
+}
+
+/* Habit Cards */
+.habitCards {
+  width: 40%;
+}
+
+.habit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00381c;
+  width: 80%;
+  margin-top: 1rem;
+  margin-left: 5rem;
+}
+
+.habit--increment {
+  background-color: red;
+  height: 100%;
+  margin-right: 1rem;
+}
+
+.habit--increment button {
+  height: 100%;
+}
+
+.habit--options {
 }

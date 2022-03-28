@@ -28,7 +28,7 @@ function renderExp() {
     progress.style.width = 0;
     return renderExp();
   }
-  indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
+  indicator.innerHTML = `EXP: ${currentValue}/${currentTarget} (${Math.floor(
     (currentValue / currentTarget) * 100
   )}%)`;
 }

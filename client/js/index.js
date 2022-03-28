@@ -24,6 +24,7 @@ function handleLogin(e) {
     password: e.target[1].value,
   };
   errorHandler(payload);
+  document.location.href = "main.html";
 }
 
 function errorHandler({ e, type }) {
