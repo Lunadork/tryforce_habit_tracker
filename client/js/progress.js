@@ -22,9 +22,9 @@ function renderBar() {
 
 function renderExp() {
   let currentValue = parseInt(progress.getAttribute("data-done"));
-  if (currentValue > currentTarget) {
+  if (currentValue >= currentTarget) {
     progress.setAttribute("data-done", 0);
-    currentTarget = currentTarget * 1.5;
+    currentTarget = Math.ceil(currentTarget * 1.5);
     progress.style.width = 0;
     return renderExp();
   }
