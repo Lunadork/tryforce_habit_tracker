@@ -30,10 +30,8 @@ function handleLogin(e) {
   {
     username: e.target[0].value,
     password: e.target[1].value
-  }
-  
+  };
   userLogin(data);
-
 }
 
 function errorHandler({ e, type }) {

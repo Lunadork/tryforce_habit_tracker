@@ -14,6 +14,7 @@ async function registerUser(data)
 
    try
    {
+       console.log(fetchString)
         const response = await fetch(`${fetchString}/auth/register`, options)
         const {id, err } = await response.json();
         if(err)
