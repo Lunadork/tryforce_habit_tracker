@@ -23,7 +23,7 @@ async function registerUser(data) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: data.userName,
+      name: data.username,
       email: data.email,
       password: data.password,
     }),

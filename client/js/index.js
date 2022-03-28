@@ -9,7 +9,7 @@ function handleRegister(e) {
   let payload = { e: e, type: "register" };
   errorHandler(payload);
   let data = {
-    userName: e.target[0].value,
+    username: e.target[0].value,
     email: e.target[1].value,
     password: e.target[2].value,
   };
@@ -26,7 +26,7 @@ function handleLogin(e) {
 
   let data =
   {
-    userName: e.target[0].value,
+    username: e.target[0].value,
     password: e.target[1].value
   }
   
