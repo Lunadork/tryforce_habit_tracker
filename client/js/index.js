@@ -45,13 +45,13 @@ function errorHandler({ e, type }) {
     if (password.value.length < 8) {
       password.style.border = "3px solid tomato";
       password.nextElementSibling.innerHTML =
-        "Password must be atleast 8 characters!";
+        "Password must be at least 8 characters!";
     }
     if (username.value.length == 0) {
       username.style.border = "3px solid tomato";
       username.nextElementSibling.innerHTML = "Username must not be empty!";
     }
-    if (!email.value.match(validRegex)) {
+    if (!email.value.match(validRegex) && email.value.length > 0) {
       email.style.border = "3px solid tomato";
       email.nextElementSibling.innerHTML = "Invalid Email!";
     }

@@ -6,7 +6,6 @@ async function registerUser(data)
        headers: {"Content-Type" : "application/json" },
        body: JSON.stringify
        ({
-
         "name" : data.userName,
         "email" : data.email,
         "password" : data.password
