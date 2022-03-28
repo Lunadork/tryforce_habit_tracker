@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script defer src="./js/progress.js"></script>
+    <script defer src="./js/modal.js"></script>
+    <title>Try Force Habit Tracker</title>
+  </head>
+  <body>
+    <header class="header--main">
+      <h1 class="header--title">Try Force - Habit Tracker!</h1>
+      <button class="btn--log">Log Out</button>
+    </header>
+    <main>
+      <section class="profile">
+        <div class="profile--card">
+          <div class="image--container">
+            <img src="./images/link.png" height="150" alt="" />
+          </div>
+          <div class="profile--content">
+            <p>Link</p>
+            <p>Level: 100</p>
+            <p>EXP:</p>
+            <div class="progress">
+              <span class="progress--indicator">0/100 EXP</span>
+              <div class="progress--done" data-done="90"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section class="habitCards">
+        <div class="habit">
+          <button>+</button>
+          <div class="habit--content">
+            <h2 class="habit--header">Practice Leet Code</h2>
+            <p class="habit--description">
+              Practice leetcode by completing around 20 tasks of leet code
+            </p>
+            <h3>Daily Tracker:</h3>
+            <div class="progress"></div>
+            <h3>Overall Completion:</h3>
+            <div class="progress"></div>
+          </div>
+          <button>-</button>
+        </div>
+      </section> -->
+    </main>
+    <div class="modal-bg">
+      <div class="modal modal--main">
+        <div class="modal--header">
+          <h2>Select Profile Picture</h2>
+          <div class="modal--content"></div>
+          <span class="modal-close">X</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
