@@ -13,7 +13,6 @@ function handleRegister(e) {
     email: e.target[1].value,
     password: e.target[2].value,
   };
-  console.log(data);
   registerUser(data);
 }
 
