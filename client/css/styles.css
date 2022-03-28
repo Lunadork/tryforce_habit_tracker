@@ -282,10 +282,14 @@ form input[type="submit"]:hover {
 
 footer {
   background-color: #00381c;
-  padding: 2rem;
+  padding: 3rem;
   position: fixed;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: end;
+}
+
+footer p {
+  margin: 0;
 }
