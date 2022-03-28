@@ -23,7 +23,6 @@ function handleLogin(e) {
     userName: e.target[0].value,
     password: e.target[1].value,
   };
-  console.log(data);
   errorHandler(payload);
 }
 
