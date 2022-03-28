@@ -267,3 +267,25 @@ form input[type="submit"]:hover {
     width: 90%;
   }
 }
+@media screen and (min-height: 900px) and (min-width: 1050px) {
+  .modal {
+    height: 50%;
+    width: 55%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: #00381c;
+  padding: 2rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
