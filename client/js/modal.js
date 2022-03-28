@@ -12,7 +12,6 @@ function toggleModal() {
   document.querySelector(".modal-bg").classList.toggle("bg-active");
 }
 
-imageCont.addEventListener("click", getTrending);
 function getTrending() {
   toggleModal();
   fetch(
@@ -32,4 +31,8 @@ function getTrending() {
     .catch((error) => {
       alert("Error: ", error);
     });
+}
+
+if (imageCont) {
+  imageCont.addEventListener("click", getTrending);
 }
