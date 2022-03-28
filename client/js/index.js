@@ -51,7 +51,7 @@ function errorHandler({ e, type }) {
       username.style.border = "3px solid tomato";
       username.nextElementSibling.innerHTML = "Username must not be empty!";
     }
-    if (!email.value.match(validRegex) && email.value.length > 0) {
+    if (!email.value.match(validRegex)) {
       email.style.border = "3px solid tomato";
       email.nextElementSibling.innerHTML = "Invalid Email!";
     }
