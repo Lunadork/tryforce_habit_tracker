@@ -21,6 +21,13 @@ function handleLogin(e) {
   e.preventDefault();
   let payload = { e: e, type: "login" };
   errorHandler(payload);
+
+  let data =
+  {
+    userName: e.target[0].value,
+    password: e.target[1].value
+  }
+  userLogin(data);
 }
 
 function errorHandler({ e, type }) {
