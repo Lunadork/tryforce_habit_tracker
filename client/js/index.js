@@ -19,12 +19,19 @@ function handleRegister(e) {
 function handleLogin(e) {
   e.preventDefault();
   let payload = { e: e, type: "login" };
-  let data = {
-    userName: e.target[0].value,
-    password: e.target[1].value,
-  };
+
   errorHandler(payload);
+
   document.location.href = "main.html";
+
+  let data =
+  {
+    userName: e.target[0].value,
+    password: e.target[1].value
+  }
+  
+  userLogin(data);
+
 }
 
 function errorHandler({ e, type }) {
