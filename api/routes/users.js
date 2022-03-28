@@ -1,0 +1,17 @@
+//Requires
+const express = require('express');
+const router = express.Router();
+const usersController = require('../controllers/users')
+
+//Paths
+router.get('/', usersController.getAll);
+router.post('/',usersController.create);
+
+router.get('/:id', usersController.getById);
+router.put('/:id',usersController.update);
+router.delete('/:id',usersController.destroy);
+
+router.get('/:id/habits', usersController.getHabitsByUserId);
+
+//Export
+module.exports = router;
