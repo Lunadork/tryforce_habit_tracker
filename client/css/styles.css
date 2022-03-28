@@ -142,15 +142,7 @@ input[type="password"] {
 }
 
 /* autofill */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
+input:-webkit-autofill {
   background-color: #0e5135;
   color: #fff;
   transition: all 5000s ease-in-out 0s;
@@ -168,7 +160,6 @@ form input:focus {
 
 form input[type="submit"] {
   cursor: pointer;
-  margin-top: 2rem;
   padding: 1.5rem 1rem;
   border: 1px solid transparent;
   border-radius: 2px;
@@ -182,6 +173,12 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   box-shadow: 0 3px 6px 0 rgb(26 24 29 / 16%), 0 3px 6px 0 rgb(26 24 29 / 24%);
   background-color: #eee860;
+}
+
+.errorText {
+  color: tomato;
+  margin: 0;
+  margin-bottom: 2rem;
 }
 
 @media screen and (max-width: 1500px) {
@@ -207,4 +204,42 @@ form input[type="submit"]:hover {
     width: 100%;
     padding: 2rem;
   }
+}
+
+/* Modal */
+
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  /* background-color: #00381c; */
+  background-image: linear-gradient(#0e5135, #0d9263);
+
+  width: 70%;
+  height: 70%;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.modal h3 {
+  text-align: center;
+  font-size: 3rem;
 }

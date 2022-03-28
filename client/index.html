@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
     <script defer src="./js/index.js"></script>
+    <script defer src="./js/modal.js"></script>
     <title>Try Force Habit Tracker</title>
   </head>
   <body>
@@ -39,23 +40,42 @@
         </div>
         <div class="hero--register">
           <h3>Sign up</h3>
-          <form action="">
+          <form class="form--register" action="">
             <input type="text" class="form--control" placeholder="Username" />
+            <p class="errorText error--user"></p>
             <input type="email" class="form--control" placeholder="Email" />
+            <p class="errorText error--email"></p>
             <input
               type="password"
               class="form--control"
               placeholder="Password"
             />
+            <p class="errorText error--password"></p>
             <input
               type="password"
               class="form--control"
               placeholder="Confirm Password"
             />
+            <p class="errorText error--confirm"></p>
             <input type="submit" name="" id="" value="Sign Up" />
           </form>
         </div>
       </section>
     </main>
+    <div class="modal-bg">
+      <div class="modal">
+        <h3>Log In</h3>
+        <form action="" class="form--login">
+          <input type="text" class="form--control" placeholder="Username" />
+          <p class="errorText error--user"></p>
+          <input type="email" class="form--control" placeholder="Email" />
+          <p class="errorText error--email"></p>
+          <input type="password" class="form--control" placeholder="Password" />
+          <p class="errorText error--password"></p>
+
+          <input type="submit" value="Sign In" />
+        </form>
+      </div>
+    </div>
   </body>
 </html>
