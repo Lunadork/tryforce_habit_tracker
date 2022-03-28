@@ -293,3 +293,32 @@ footer {
 footer p {
   margin: 0;
 }
+
+/* Main page */
+
+.header--main {
+  padding: 0rem;
+}
+
+/* Profile Section */
+
+.profile {
+  background-color: #00381c;
+  padding: 1rem;
+}
+
+.profile--card {
+  border: 2px solid black;
+  width: 13%;
+  overflow: hidden;
+  background-color: #0e5135;
+}
+.image--container {
+  background-color: #0d9263;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.profile--content {
+  padding: 1rem;
+}
