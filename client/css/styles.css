@@ -38,8 +38,6 @@ header {
   align-items: center;
   background-image: linear-gradient(#0e5135, #0d9263);
   padding: 0.5rem;
-  /* background-image: linear-gradient(#0d9263, #0e5135); */
-
   color: #fff;
 }
 
@@ -78,7 +76,7 @@ header {
 
 /* Hero Section */
 .hero {
-  margin-top: 8rem;
+  margin-top: 6rem;
 
   display: flex;
   justify-content: center;
@@ -90,6 +88,9 @@ header {
   width: 40%;
 }
 
+.hero--header {
+  font-size: 2.5rem;
+}
 .hero--content {
   display: flex;
   flex-direction: column;
@@ -98,6 +99,8 @@ header {
 
 .hero--text {
   max-width: 65ch;
+  font-size: 2rem;
+  line-height: 1.5;
   text-align: center;
 }
 .pixel--container {
@@ -138,7 +141,7 @@ input[type="password"] {
   width: 100%;
   margin-bottom: 1.5rem;
   outline: none;
-  transition: all 0.15s;
+  transition: all 0.15s, visibility 0s;
 }
 
 /* autofill */
@@ -167,7 +170,7 @@ form input[type="submit"] {
   color: black;
   background-color: #d4ce46;
   box-shadow: 0 1px 3px 0 rgb(26 24 29 / 12%), 0 1px 2px 0 rgb(26 24 29 / 24%);
-  transition: all 0.15s;
+  transition: all 0.15s, visibility 0s;
 }
 
 form input[type="submit"]:hover {
@@ -179,6 +182,10 @@ form input[type="submit"]:hover {
   color: tomato;
   margin: 0;
   margin-bottom: 2rem;
+}
+
+.register--title {
+  font-size: 2.5rem;
 }
 
 @media screen and (max-width: 1500px) {
@@ -233,13 +240,30 @@ form input[type="submit"]:hover {
   background-image: linear-gradient(#0e5135, #0d9263);
 
   width: 70%;
-  height: 70%;
+  height: 65%;
   border-radius: 10px;
   overflow: hidden;
   padding: 1rem;
+  position: relative;
+  transition: all 0.1s;
 }
 
 .modal h3 {
   text-align: center;
   font-size: 3rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 950px) {
+  .modal {
+    height: 50%;
+    width: 90%;
+  }
 }
