@@ -10,19 +10,31 @@ profile.addEventListener("click", (e) => {
   let current = progress.getAttribute("data-done");
   let incremented = parseInt(current) + 5;
   progress.setAttribute("data-done", incremented);
-  progress.style.width = incremented + "%";
   renderExp();
+  renderBar();
 });
+
+function renderBar() {
+  let currentValue = parseInt(progress.getAttribute("data-done"));
+
+  progress.style.width = Math.floor((currentValue / currentTarget) * 100) + "%";
+}
 
 function renderExp() {
   let currentValue = parseInt(progress.getAttribute("data-done"));
   if (currentValue > currentTarget) {
-    return alert("Over Target!");
+    progress.setAttribute("data-done", 0);
+    currentTarget = currentTarget * 1.5;
+    progress.style.width = 0;
+    return renderExp();
   }
   indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
     (currentValue / currentTarget) * 100
   )}%)`;
-  console.log(currentValue);
 }
 
 renderExp();
+
+document.querySelector(".btn--log").addEventListener("click", () => {
+  document.location.href = "index.html";
+});
