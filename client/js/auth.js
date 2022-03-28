@@ -22,7 +22,7 @@ async function registerUser(data)
         }
         else
         {
-            alert(`User ${id} created!  Please proceed to log in with these details`);
+            alert(`User ${id} created! Please proceed to log in with these details`);
         }
    }
    catch (err)
