@@ -19,6 +19,11 @@ function handleRegister(e) {
 function handleLogin(e) {
   e.preventDefault();
   let payload = { e: e, type: "login" };
+  let data = {
+    userName: e.target[0].value,
+    password: e.target[1].value,
+  };
+  console.log(data);
   errorHandler(payload);
 }
 
@@ -37,8 +42,7 @@ function errorHandler({ e, type }) {
     }
     if (username.value.length == 0) {
       username.style.border = "3px solid tomato";
-      username.nextElementSibling.innerHTML =
-        "Username/Email must not be empty!";
+      username.nextElementSibling.innerHTML = "Username must not be empty!";
     }
     if (!email.value.match(validRegex)) {
       email.style.border = "3px solid tomato";
