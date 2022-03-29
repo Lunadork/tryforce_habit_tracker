@@ -14,6 +14,8 @@ module.exports = class User
         this.profilepic = data.profilepic;
         this.xp = data.xp;
         this.level = data.level;
+        this.xptarget = data.xptarget;
+        this.src = data.src;
     }
 
 
@@ -23,7 +25,12 @@ module.exports = class User
         {
             try 
             {
-                const result = await db.query('SELECT id, username, email, rupees, profilePic, xp, level FROM users;')
+                const result = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget 
+                                                FROM users 
+                                                INNER JOIN levels 
+                                                ON users.level = levels.id
+                                                INNER JOIN profilePics
+                                                ON users.profilePic = profilePics.id;`)
                 const users = result.rows.map(a => new User(a));
                 res(users);
             } 
@@ -41,7 +48,13 @@ module.exports = class User
         {
             try
             {
-                let userData = await db.query(`SELECT * FROM users WHERE id = $1;`, [id]);
+                let userData = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget 
+                FROM users 
+                INNER JOIN levels 
+                ON users.level = levels.id
+                INNER JOIN profilePics
+                ON users.profilePic = profilePics.id
+                WHERE users.id = $1;`, [id]);
                 res(userData.rows[0]);
             }
             catch (err)
@@ -93,7 +106,6 @@ module.exports = class User
 
         return new Promise (async (res,rej) => 
         {
-            console.log("Try catch create user - user model")
             try 
             {
                 let result = await db.query(`INSERT INTO users (username, email, password, rupees, profilePic, xp, level)
@@ -169,6 +181,26 @@ module.exports = class User
             };
         });
 
+    }
+
+    static getXpTarget(id)
+    {
+        return new Promise(async (res, rej) => 
+        {
+            try 
+            {
+                const result = await db.query(`SELECT users.id, users.level, levels.xptarget 
+                                                FROM users 
+                                                INNER JOIN levels
+                                                ON users.level = levels.id
+                                                WHERE users.id = $1 ;`, [ id ]);
+                res(result.rows[0]);
+            } 
+            catch (err) 
+            {
+                rej('Habitus non existus or non findus');
+            };
+        });
     }
 
 
