@@ -1,3 +1,5 @@
+const fetchString = `http://localhost:3000`;
+
 async function getAll(type) {
   try {
     const res = await fetch(`${fetchString}${type}/`);
@@ -34,8 +36,6 @@ async function registerUser(data) {
 
 //TO AMEND WITH PROPER INTAKE OF DATA DEPENDING ON HOW WE DO IT
 async function createHabit(e) {}
-
-const fetchString = `http://localhost:3000`;
 
 async function getAll(type) {
   try {
