@@ -3,8 +3,25 @@ const fetchString = `http://localhost:3000`;
 async function getAll(type) {
   try {
     const res = await fetch(`${fetchString}/${type}/`);
-    const data = await res.json();
-    return data;
+    return await res.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getAllPfps() {
+  try {
+    const res = await fetch(`${fetchString}/pfp`);
+    return await res.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function getOnePfp(id) {
+  try {
+    const res = await fetch(`${fetchString}/pfp/${id}`);
+    return await res.json();
   } catch (err) {
     console.log(err);
   }
@@ -67,15 +84,16 @@ async function getHabitsForUser(id) {
   }
 }
 
-async function updateProfile(imageUrl) {
+async function updateProfile(id, profilePic) {
   const options = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      url: imageUrl
+      id: id,
+      profilePic: profilePic
     }),
   };
-    const response = await fetch(`${fetchString}/users/${localStorage.getItem('id')}`, options);
+    const response = await fetch(`${fetchString}/users/${id}}`, options);
     const json = await response.json();
     return json.profilepic;
 }

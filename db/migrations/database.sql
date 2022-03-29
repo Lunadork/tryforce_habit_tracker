@@ -25,7 +25,7 @@ CREATE TABLE users
     password VARCHAR(500) NOT NULL,
     rupees int,
     profilePic int,
-    FOREIGN KEY(profilePic) REFERENCES profilepics(id),
+    FOREIGN KEY(profilePic) REFERENCES profilePics(id),
     xp int,
     level int,
     FOREIGN KEY (level) REFERENCES levels(id)

@@ -6,7 +6,7 @@ habits.forEach((habit) => {
   let overallProgress = habit.getElementsByClassName("progress--done")[1];
   overallProgress.style.width = "100%";
   overallProgress.style.opacity = "100%";
-  console.log(overallProgress);
+  //console.log(overallProgress);
   let overallIndicator = overallProgress.previousElementSibling;
   renderExp();
   renderOverall();
