@@ -3,8 +3,13 @@ habits.forEach((habit) => {
   let progress = habit.getElementsByClassName("progress--done")[0];
   let currentTarget = 2;
   let indicator = progress.previousElementSibling;
-
+  let overallProgress = habit.getElementsByClassName("progress--done")[1];
+  overallProgress.style.width = "100%";
+  overallProgress.style.opacity = "100%";
+  console.log(overallProgress);
+  let overallIndicator = overallProgress.previousElementSibling;
   renderExp();
+  renderOverall();
   let incrementor = habit.firstElementChild.firstElementChild;
   let decrementor =
     habit.firstElementChild.firstElementChild.nextElementSibling;
@@ -48,17 +53,12 @@ habits.forEach((habit) => {
     progress.style.width =
       Math.floor((currentValue / currentTarget) * 100) + "%";
   }
+  function renderOverall() {
+    overallIndicator.innerHTML = `100%`;
+  }
 
   function renderExp() {
     let currentValue = parseInt(progress.getAttribute("data-done"));
-    if (currentValue == currentTarget) {
-      console.log(currentValue, currentTarget);
-      //   currentTarget = Math.ceil(currentTarget * 1.5);
-      //   progress.style.width = 0;
-      return (indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
-        (currentValue / currentTarget) * 100
-      )}%)`);
-    }
     indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
       (currentValue / currentTarget) * 100
     )}%)`;
