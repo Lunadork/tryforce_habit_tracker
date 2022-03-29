@@ -14,21 +14,17 @@ async function registerUser(data)
 
    try
    {
-       console.log(fetchString)
-        const response = await fetch(`${fetchString}/auth/register`, options)
-        const {id, err } = await response.json();
-        if(err)
-        {
-            throw Error (err);
-        }
-        else
-        {
-            alert(`User ${id} created! Please proceed to log in with these details`);
+        console.log(fetchString);
+        const response = await fetch(`${fetchString}/auth/register`, options);
+        if (response.ok) {
+            return {success: true};
+        } else {
+            return {success: false, message: await response.text()};
         }
    }
    catch (err)
    {
-       console.log(err);
+        console.log(err);
    }
 }
 

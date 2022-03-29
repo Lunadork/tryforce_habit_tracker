@@ -2,13 +2,13 @@ let register = document.querySelector(".form--register");
 let login = document.querySelector(".form--login");
 const invalidUserRegister = document.querySelector("#invalidUserRegister");
 const invalidUserLogin = document.querySelector("#invalidUserLogin");
-invalidUserRegister.style = "hidden";
-invalidUserLogin.style = "hidden";
+invalidUserRegister.style.display = "hidden";
+invalidUserLogin.style.display = "hidden";
 
 register.addEventListener("submit", handleRegister);
 login.addEventListener("submit", handleLogin);
 
-function handleRegister(e) {
+async function handleRegister(e) {
   e.preventDefault();
 
   let payload = { e: e, type: "register" };
@@ -20,7 +20,13 @@ function handleRegister(e) {
     email: e.target[1].value,
     password: e.target[2].value,
   };
-  registerUser(data);
+  const response = await registerUser(data);
+  console.log(response);
+  if (response.success) {
+  } else {
+    invalidUserRegister.textContent = response.message;
+    invalidUserRegister.style.display = "initial";
+  }
 }
 
 async function handleLogin(e) {
@@ -38,7 +44,7 @@ async function handleLogin(e) {
   if (await userLogin(data)) {
     window.location.href = "/main.html";
   } else {
-    invalidUserLogin.textContent = "Invalid user";
+    invalidUserLogin.textContent = "Invalid name/password credentials";
     invalidUserLogin.style = "initial";
   }
 }
