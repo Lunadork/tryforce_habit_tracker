@@ -61,7 +61,7 @@ function getTrending() {
         item.classList.remove("image--selected");
       }
       e.target.classList.add("image--selected");
-      modalSubmit.style.display = "initial";
+      
       selectedImage = image.src;
     });
     document.querySelector(".modal--content").append(image);
@@ -79,12 +79,8 @@ async function submitProfile() {
 }
 
 async function pageLoad() {
-  //const pp = await getOne('users', localStorage.getItem('id')).profilepicture;
-  //console.log(pp)
-  //profilePicture.src = await getOne('users', localStorage.getItem('id')).profilepicture;
-
-  //hacky fixes until doing it properly
-  profilePicture.src = localStorage.getItem("image");
+  let userData = await getOne('users', localStorage.getItem('id'));
+  profilePicture.src = userData.profilepic;
 }
 
 pageLoad();
