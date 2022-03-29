@@ -5,8 +5,15 @@ const modalBg = document.querySelector(".modal-bg");
 const modal = document.querySelector(".modal");
 const imageCont = document.querySelector(".image--container");
 const profilePicture = document.querySelector("#profilePicture");
+const modalHeader = document.querySelector(".modal--header").firstElementChild;
 
-let SelectedImage = '/images/link.png'
+const imageData = [
+  "./images/link.png",
+  "./images/link2.png",
+  "./images/zelda.png",
+  "./images/zeldacdi.jpg",
+];
+let selectedImage = imageData[0];
 
 modalBtn.addEventListener("click", toggleModal);
 
@@ -42,6 +49,7 @@ function toggleModal() {
 
 function getTrending() {
   document.querySelector(".modal--content").innerHTML = "";
+  modalHeader.textContent = "Select Profile Picture";
   modalSubmit.style.display = "none";
   toggleModal();
   for (let i = 0; i < imageData.length; i++) {
@@ -76,9 +84,39 @@ async function pageLoad() {
   //const pp = await getOne('users', localStorage.getItem('id')).profilepicture;
   //console.log(pp)
   //profilePicture.src = await getOne('users', localStorage.getItem('id')).profilepicture;
-
   //hacky fixes until doing it properly
   profilePicture.src = localStorage.getItem("image");
 }
 
 pageLoad();
+
+let add = document.querySelector(".btn--add");
+
+add.addEventListener("click", toggleForm);
+
+function toggleForm() {
+  toggleModal();
+  modalSubmit.style.display = "none";
+  modalHeader.textContent = "Add a Habit";
+  document.querySelector(".modal--content").innerHTML = `
+  <form action="" class="form--habit">
+  <input
+    type="text"
+    class="form--control"
+    placeholder="Habit Title"
+  />
+  <p class="errorText error--habit"></p>
+  <input type="text" class="form--control" placeholder="HH:MM:SS" />
+  <p class="errorText error--time"></p>
+
+  <select class="form--control" name="categories" id="categories">
+    <option value="lifestyle">Lifestyle</option>
+    <option value="fitness">Fitness</option>
+    <option value="work">Work</option>
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+`;
+}
+
+// Regex for time :^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$
