@@ -1,3 +1,20 @@
+DROP TABLE IF EXISTS levels;
+
+CREATE TABLE levels
+(
+    id serial PRIMARY KEY,
+    xptarget int
+);
+
+
+DROP TABLE IF EXISTS profilePics;
+
+CREATE TABLE profilePics
+(
+    id serial PRIMARY KEY,
+    src VARCHAR(500)
+);
+
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users
@@ -6,12 +23,14 @@ CREATE TABLE users
     username VARCHAR(100) NOT NULL UNIQUE,
     email VARCHAR(200) NOT NULL UNIQUE,
     password VARCHAR(500) NOT NULL,
-    rupees bigint,
-    profilePic VARCHAR(200),
-    xp bigint,
-    xpTarget bigint,
-    level int
+    rupees int,
+    profilePic int,
+    FOREIGN KEY(profilePic) REFERENCES profilepics(id),
+    xp int,
+    level int,
+    FOREIGN KEY (level) REFERENCES levels(id)
 );
+
 
 DROP TABLE IF EXISTS habits;
 
@@ -25,4 +44,4 @@ CREATE TABLE habits
     timestampOfLastTrack timestamp,
     streak int,
     category VARCHAR(250)
-)
+);

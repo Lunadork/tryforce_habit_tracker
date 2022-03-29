@@ -2,7 +2,7 @@ const fetchString = `http://localhost:3000`;
 
 async function getAll(type) {
   try {
-    const res = await fetch(`${fetchString}${type}/`);
+    const res = await fetch(`${fetchString}/${type}/`);
     const data = await res.json();
     return data;
   } catch (err) {
@@ -22,7 +22,7 @@ async function registerUser(data) {
   };
 
   try {
-    const response = await fetch(`${fetchString}users`, options);
+    const response = await fetch(`${fetchString}/users`, options);
     const { id, err } = await response.json();
     if (err) {
       throw Error(err);
