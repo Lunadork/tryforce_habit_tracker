@@ -7,7 +7,7 @@ CREATE TABLE users
     email VARCHAR(200) NOT NULL UNIQUE,
     password VARCHAR(500) NOT NULL,
     rupees bigint,
-    profilePic int,
+    profilePic VARCHAR(200),
     xp bigint,
     xpTarget bigint,
     level int

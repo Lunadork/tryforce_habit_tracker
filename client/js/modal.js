@@ -1,14 +1,17 @@
-let modalBtn = document.querySelector(".btn--log");
-let modalClose = document.querySelector(".modal-close");
-let modalBg = document.querySelector(".modal-bg");
-let modal = document.querySelector(".modal");
-let imageCont = document.querySelector(".image--container");
+const modalBtn = document.querySelector(".btn--log");
+const modalClose = document.querySelector(".modal-close");
+const modalSubmit = document.querySelector(".modal-submit");
+const modalBg = document.querySelector(".modal-bg");
+const modal = document.querySelector(".modal");
+const imageCont = document.querySelector(".image--container");
 
 const imageData = ["/images/link.png", "/images/link2.png", "/images/zelda.png"];
 
 modalBtn.addEventListener("click", toggleModal);
 
 modalClose.addEventListener("click", toggleModal);
+
+modalSubmit.addEventListener("click", submitProfile);
 
 function toggleModal() {
   document.querySelector(".modal-bg").classList.toggle("bg-active");
@@ -38,7 +41,7 @@ function toggleModal() {
 
 function getTrending() {
   document.querySelector(".modal--content").innerHTML = '';
-  document.querySelector(".modal-submit").style.display = "none";
+  modalSubmit.style.display = "none";
   toggleModal();
   for (let i = 0; i < imageData.length; i++) {
     let image = document.createElement("img");
@@ -51,7 +54,8 @@ function getTrending() {
         item.classList.remove("image--selected");
       }
       e.target.classList.add("image--selected");
-      document.querySelector(".modal-submit").style.display = "initial";
+      modalSubmit.style.display = "initial";
+      selectedImage = image.src;
     });
     document.querySelector(".modal--content").append(image);
   }
@@ -59,4 +63,8 @@ function getTrending() {
 
 if (imageCont) {
   imageCont.addEventListener("click", getTrending);
+}
+
+function submitProfile() {
+  
 }
