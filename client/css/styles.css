@@ -237,6 +237,7 @@ form input[type="submit"]:hover {
   opacity: 0;
   transition: visibility 0s, opacity 0.5s;
   flex-direction: column;
+  z-index: 999;
 }
 
 .modal-submit {
@@ -251,7 +252,6 @@ form input[type="submit"]:hover {
 .modal {
   /* background-color: #00381c; */
   background-image: linear-gradient(#0e5135, #0d9263);
-
   width: 70%;
   height: 65%;
   border-radius: 10px;
@@ -338,6 +338,7 @@ footer p {
   width: 20%;
   padding: 0.5rem;
   margin-top: 1rem;
+  height: 10%;
 }
 
 .profile--card {
@@ -394,16 +395,31 @@ footer p {
 /* Habit Cards */
 .habitCards {
   width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.habits--container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .habit {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #00381c;
+  background-color: rgb(135, 135, 135);
+  margin-bottom: 1.5rem;
   width: 80%;
-  margin-top: 1rem;
-  margin-left: 5rem;
+  overflow: hidden;
+  color: black;
+  border-radius: 10px;
+}
+.habit h2,
+h3 {
+  font-family: "Roboto", sans-serif !important;
 }
 
 .habit--increment {
@@ -417,8 +433,108 @@ footer p {
 }
 
 .habit--options {
+  background-color: dodgerblue;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.options--red {
+  background-color: tomato;
+}
+.habit--options button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+  padding: 1rem;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(27, 55, 31, 0.35);
+  font-weight: 500;
+  font-size: 2rem;
+  transition: all 0.15s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.habit--options button:hover {
+  background: rgba(7, 59, 111, 0.5);
+}
+
+#red--option:hover {
+  background: rgba(123, 23, 5, 0.5);
+}
+
+#red--option svg {
+  fill: rgb(218, 218, 218);
+  stroke-width: 0.1;
+}
+
+.habit--content {
+  padding: 1rem;
 }
 
 .image--selected {
   border: 3px solid lime;
+}
+
+/* layout for main */
+
+.main--top {
+  display: flex;
+}
+.habits--title {
+  text-align: center;
+  font-size: 2.8rem;
+}
+
+@media screen and (max-width: 1550px) {
+  .habit {
+    width: 98%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main--top {
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  .profile {
+    align-self: flex-start;
+    width: 25%;
+  }
+  .habitCards {
+    width: 100%;
+  }
+  .habits--container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .habit {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .habit {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .habit {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .habit {
+    width: 100%;
+  }
+  .habits--container {
+    padding: 1rem;
+  }
 }
