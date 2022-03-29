@@ -77,7 +77,24 @@ async function getHabitsForUser(id) {
   }
 }
 
-async function updateProfile() {
-
+async function updateProfile(imageUrl) {
+  const options = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      url: imageUrl
+    }),
+  };
+  //try {
+    const response = await fetch(`${fetchString}/users/${localStorage.getItem('id')}`, options);
+  //  const { id, err } = await response.json();
+  //  if (err) {
+  //    throw Error(err);
+  //  } else {
+  //    alert(`User ${id} created!  Please proceed to log in with these details`);
+  //  }
+  //} catch (err) {
+  //  console.log(err);
+  //}
 
 }
