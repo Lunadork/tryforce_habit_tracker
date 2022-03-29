@@ -4,6 +4,8 @@ let modalBg = document.querySelector(".modal-bg");
 let modal = document.querySelector(".modal");
 let imageCont = document.querySelector(".image--container");
 
+const imageData = ["/images/link.png", "/images/link2.png", "/images/zelda.png"];
+
 modalBtn.addEventListener("click", toggleModal);
 
 modalClose.addEventListener("click", toggleModal);
@@ -36,11 +38,11 @@ function toggleModal() {
 
 function getTrending() {
   document.querySelector(".modal--content").innerHTML = '';
+  document.querySelector(".modal-submit").style.display = "none";
   toggleModal();
-  const data = ["/images/link.png", "/images/link2.png", "/images/zelda.png"];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < imageData.length; i++) {
     let image = document.createElement("img");
-    image.src = data[i];
+    image.src = imageData[i];
     image.classList.add("gif-image");
     image.id = i;
     image.addEventListener('click', e => {
@@ -49,6 +51,7 @@ function getTrending() {
         item.classList.remove("image--selected");
       }
       e.target.classList.add("image--selected");
+      document.querySelector(".modal-submit").style.display = "initial";
     });
     document.querySelector(".modal--content").append(image);
   }
