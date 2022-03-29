@@ -292,6 +292,7 @@ form input[type="submit"]:hover {
 }
 
 .modal--main {
+  width: 40%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -299,8 +300,8 @@ form input[type="submit"]:hover {
 }
 
 .modal--content img {
-  width: 30%;
-  height: 100px;
+  /*width: 30%;*/
+  height: 150px;
   margin-right: 1rem;
 }
 /* Footer */
@@ -411,4 +412,8 @@ footer p {
 }
 
 .habit--options {
+}
+
+.image--selected {
+  border: 3px solid lime;
 }
