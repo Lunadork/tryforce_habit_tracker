@@ -1,5 +1,9 @@
 let register = document.querySelector(".form--register");
 let login = document.querySelector(".form--login");
+const invalidUserRegister = document.querySelector("#invalidUserRegister");
+const invalidUserLogin = document.querySelector("#invalidUserLogin");
+invalidUserRegister.style = "hidden";
+invalidUserLogin.style = "hidden";
 
 register.addEventListener("submit", handleRegister);
 login.addEventListener("submit", handleLogin);
@@ -19,7 +23,7 @@ function handleRegister(e) {
   registerUser(data);
 }
 
-function handleLogin(e) {
+async function handleLogin(e) {
   e.preventDefault();
   let payload = { e: e, type: "login" };
 
@@ -31,7 +35,12 @@ function handleLogin(e) {
     username: e.target[0].value,
     password: e.target[1].value
   };
-  userLogin(data);
+  if (await userLogin(data)) {
+    window.location.href = "/main.html";
+  } else {
+    invalidUserLogin.textContent = "Invalid user";
+    invalidUserLogin.style = "initial";
+  }
 }
 
 function errorHandler({ e, type }) {

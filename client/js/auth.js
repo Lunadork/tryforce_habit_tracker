@@ -49,14 +49,12 @@ async function userLogin(data)
         };
         const result = await fetch(`${fetchString}/auth/login`, options);
         const resultData = await result.json();
-        if (data.err)
-        { 
-            throw Error("Error: "+ data.err); 
+        if (resultData.success) {
+            //this is actually horrific practice. onwards!!
+            localStorage.setItem('Bearer', resultData.token)
+            return true;
         }
-        else
-        {
-            localStorage.setItem('Bearer', data.token)
-        }
+        return false;
     } 
     catch (err) 
     {
