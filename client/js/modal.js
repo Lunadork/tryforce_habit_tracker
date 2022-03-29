@@ -5,7 +5,6 @@ const modalBg = document.querySelector(".modal-bg");
 const modal = document.querySelector(".modal");
 const imageCont = document.querySelector(".image--container");
 const profilePicture = document.querySelector("#profilePicture");
-const modalHeader = document.querySelector(".modal--header").firstElementChild;
 
 const imageData = [
   "./images/link.png",
@@ -48,6 +47,8 @@ function toggleModal() {
 //}
 
 function getTrending() {
+  const modalHeader =
+    document.querySelector(".modal--header").firstElementChild;
   document.querySelector(".modal--content").innerHTML = "";
   modalHeader.textContent = "Select Profile Picture";
   modalSubmit.style.display = "none";
@@ -95,6 +96,9 @@ let add = document.querySelector(".btn--add");
 add.addEventListener("click", toggleForm);
 
 function toggleForm() {
+  const modalHeader =
+    document.querySelector(".modal--header").firstElementChild;
+
   toggleModal();
   modalSubmit.style.display = "none";
   modalHeader.textContent = "Add a Habit";
@@ -106,10 +110,11 @@ function toggleForm() {
     placeholder="Habit Title"
   />
   <p class="errorText error--habit"></p>
-  <input type="text" class="form--control" placeholder="HH:MM:SS" />
+  <input type="text" class="form--control" placeholder="Frequency - HH:MM:SS" />
   <p class="errorText error--time"></p>
 
   <select class="form--control" name="categories" id="categories">
+    <option value="" disabled selected>Select Category</option>
     <option value="lifestyle">Lifestyle</option>
     <option value="fitness">Fitness</option>
     <option value="work">Work</option>

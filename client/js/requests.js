@@ -38,16 +38,18 @@ async function updateProfile(imageUrl) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      url: imageUrl
+      url: imageUrl,
     }),
   };
-    const response = await fetch(`${fetchString}/users/${localStorage.getItem('id')}`, options);
-    const json = await response.json();
-    return json.profilepic;
+  const response = await fetch(
+    `${fetchString}/users/${localStorage.getItem("id")}`,
+    options
+  );
+  const json = await response.json();
+  return json.profilepic;
 }
 
-async function getLevels()
-{
+async function getLevels() {
   try {
     const res = await fetch(`${fetchString}/game/levels`);
     const data = await res.json();
@@ -66,5 +68,3 @@ async function getLevelsById(id) {
     console.log(err);
   }
 }
-
-
