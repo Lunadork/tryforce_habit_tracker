@@ -15,21 +15,31 @@ habits.forEach((habit) => {
 
   incrementor.addEventListener("click", () => {
     let current = progress.getAttribute("data-done");
-    let incremented = parseInt(current) + 1;
-    progress.setAttribute("data-done", incremented);
-    renderExp();
-    renderBar();
+    if (current == currentTarget) {
+      renderExp();
+      renderBar();
+    } else {
+      let incremented = parseInt(current) + 1;
+      progress.setAttribute("data-done", incremented);
+      renderExp();
+      renderBar();
 
-    console.log(progress, indicator);
+      console.log(progress, indicator);
+    }
   });
   decrementor.addEventListener("click", () => {
     let current = progress.getAttribute("data-done");
-    let incremented = parseInt(current) - 1;
-    progress.setAttribute("data-done", incremented);
-    renderExp();
-    renderBar();
+    if (current == 0) {
+      renderExp();
+      renderBar();
+    } else {
+      let incremented = parseInt(current) - 1;
+      progress.setAttribute("data-done", incremented);
+      renderExp();
+      renderBar();
 
-    console.log(progress, indicator);
+      console.log(progress, indicator);
+    }
   });
 
   function renderBar() {
