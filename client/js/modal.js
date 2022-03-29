@@ -6,7 +6,12 @@ const modal = document.querySelector(".modal");
 const imageCont = document.querySelector(".image--container");
 const profilePicture = document.querySelector("#profilePicture");
 
-const imageData = ["/images/link.png", "/images/link2.png", "/images/zelda.png", "/images/zeldacdi.jpg"];
+const imageData = [
+  "./images/link.png",
+  "./images/link2.png",
+  "./images/zelda.png",
+  "./images/zeldacdi.jpg",
+];
 let selectedImage = imageData[0];
 
 modalBtn.addEventListener("click", toggleModal);
@@ -42,7 +47,7 @@ function toggleModal() {
 //}
 
 function getTrending() {
-  document.querySelector(".modal--content").innerHTML = '';
+  document.querySelector(".modal--content").innerHTML = "";
   modalSubmit.style.display = "none";
   toggleModal();
   for (let i = 0; i < imageData.length; i++) {
@@ -50,7 +55,7 @@ function getTrending() {
     image.src = imageData[i];
     image.classList.add("gif-image");
     image.id = i;
-    image.addEventListener('click', e => {
+    image.addEventListener("click", (e) => {
       const children = document.querySelector(".modal--content").children;
       for (let item of children) {
         item.classList.remove("image--selected");
@@ -69,7 +74,7 @@ if (imageCont) {
 
 async function submitProfile() {
   profilePicture.src = await updateProfile(selectedImage);
-  localStorage.setItem('image', selectedImage)
+  localStorage.setItem("image", selectedImage);
   toggleModal();
 }
 
@@ -79,7 +84,7 @@ async function pageLoad() {
   //profilePicture.src = await getOne('users', localStorage.getItem('id')).profilepicture;
 
   //hacky fixes until doing it properly
-  profilePicture.src = localStorage.getItem('image');
+  profilePicture.src = localStorage.getItem("image");
 }
 
 pageLoad();
