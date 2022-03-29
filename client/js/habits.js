@@ -47,6 +47,10 @@ habits.forEach((habit) => {
     }
   });
 
+  deleteButton.addEventListener("click", () => {
+    habit.remove();
+  });
+
   function renderBar() {
     let currentValue = parseInt(progress.getAttribute("data-done"));
 
