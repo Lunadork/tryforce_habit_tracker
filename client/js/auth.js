@@ -27,7 +27,6 @@ async function registerUser(data)
    }
 }
 
-
 async function userLogin(data)
 {
     try 

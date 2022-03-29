@@ -6,13 +6,7 @@ const modal = document.querySelector(".modal");
 const imageCont = document.querySelector(".image--container");
 const profilePicture = document.querySelector("#profilePicture");
 
-const imageData = [
-  "./images/link.png",
-  "./images/link2.png",
-  "./images/zelda.png",
-  "./images/zeldacdi.jpg",
-];
-let selectedImage = imageData[0];
+let SelectedImage = '/images/link.png'
 
 modalBtn.addEventListener("click", toggleModal);
 
