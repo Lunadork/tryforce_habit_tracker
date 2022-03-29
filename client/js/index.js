@@ -23,6 +23,7 @@ async function handleRegister(e) {
   const response = await registerUser(data);
   console.log(response);
   if (response.success) {
+    handleLogin({target: [document.querySelector("#registerUsername"), document.querySelector("#registerPassword")], sillyWorkaround: true})
   } else {
     invalidUserRegister.textContent = response.message;
     invalidUserRegister.style.display = "initial";
@@ -30,7 +31,10 @@ async function handleRegister(e) {
 }
 
 async function handleLogin(e) {
-  e.preventDefault();
+  //needed because this function isn't pure enough :O
+  if (!e.sillyWorkaround) {
+    e.preventDefault();
+  }
   let payload = { e: e, type: "login" };
 
   //kill the request if error in login form
