@@ -6,7 +6,7 @@ async function registerUser(data)
        headers: {"Content-Type" : "application/json" },
        body: JSON.stringify
        ({
-        "name" : data.userName,
+        "username" : data.username,
         "email" : data.email,
         "password" : data.password
        })
@@ -14,20 +14,17 @@ async function registerUser(data)
 
    try
    {
-        const response = await fetch(`${fetchString}/auth/register`, options)
-        const {id, err } = await response.json();
-        if(err)
-        {
-            throw Error (err);
-        }
-        else
-        {
-            alert(`User ${id} created!  Please proceed to log in with these details`);
+        console.log(fetchString);
+        const response = await fetch(`${fetchString}/auth/register`, options);
+        if (response.ok) {
+            return {success: true};
+        } else {
+            return {success: false, message: await response.text()};
         }
    }
    catch (err)
    {
-       console.log(err);
+        console.log(err);
    }
 }
 
@@ -42,30 +39,23 @@ async function userLogin(data)
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify
             ({
-                "name" : data.userName,
+                "username" : data.username,
                 "password" : data.password
             })
         };
         const result = await fetch(`${fetchString}/auth/login`, options);
-        const resultdata = await result.json();
-        if (data.err)
-        { 
-            throw Error("Error: "+ data.err); 
+        const resultData = await result.json();
+        if (resultData.success) {
+            //this is actually horrific practice. onwards!!
+            localStorage.setItem('Bearer', resultData.token)
+            localStorage.setItem('id', resultData.id)
+            return true;
         }
-        else
-        {
-            loginPart2(resultdata);
-        }
+        return false;
     } 
     catch (err) 
     {
         console.log(`Login failed for reason: ${err}`);
     }
 
-}
-
-function loginPart2(data)
-{
-    localStorage.setItem('Bearer', data.token)
-    //Move to dashboard.
 }

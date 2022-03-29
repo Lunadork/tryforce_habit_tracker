@@ -12,16 +12,17 @@
       href="https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="./favicon.ico" />
+    <script defer src="./js/requests.js"></script>
     <script defer src="./js/index.js"></script>
     <script defer src="./js/modal.js"></script>
-    <script defer src="./js/requests.js"></script>
     <script defer src="./js/auth.js"></script>
     <script defer src="./js/layout.js"></script>
     <title>Try Force Habit Tracker</title> 
   </head>
   <body>
     <header>
-      <h1 class="header--title">Try Force - Habit Tracker!</h1>
+      <h1 class="header--title"><img src="./images/triforce40.png" class="header--image">Try Force</h1>
       <button class="btn--log">Log In</button>
     </header>
     <main>
@@ -34,57 +35,43 @@
           </div>
           <p class="hero--text">
             Legend of Zelda themed habit tracker. Track your habits and daily
-            goals with the Try Force habit tracker. Level up and Earn badges, as
+            goals with the Try Force habit tracker. Level up and earn badges, as
             you earn streaks and complete tasks/habits for the day!
           </p>
         </div>
         <div class="hero--register">
           <h3 class="register--title">Sign up</h3>
           <form class="form--register" action="">
-            <input type="text" class="form--control" placeholder="Username" />
+            <input type="text" class="form--control" id="registerUsername" placeholder="Username" />
             <p class="errorText error--user"></p>
             <input type="email" class="form--control" placeholder="Email" />
             <p class="errorText error--email"></p>
-            <input
-              type="password"
-              class="form--control"
-              placeholder="Password"
-            />
+            <input type="password" class="form--control" id="registerPassword" placeholder="Password (min 8 characters)" />
             <p class="errorText error--password"></p>
-            <input
-              type="password"
-              class="form--control"
-              placeholder="Confirm Password"
-            />
+            <input type="password" class="form--control" placeholder="Confirm Password" />
             <p class="errorText error--confirm"></p>
             <input type="submit" name="" id="" value="Sign Up" />
+            <p class="errorText" id="invalidUserRegister"></p>
           </form>
         </div>
       </section>
     </main>
     <footer>
-      <p>Created by Andrew, Rakib and Zeia</p>
+      <p>By Team Triforce. Sue us Nintendo</p>
     </footer>
     <div class="modal-bg">
       <div class="modal">
         <h3>Log In</h3>
         <form action="" class="form--login">
-          <input
-            type="text"
-            class="form--control"
-            placeholder="Username/Email"
-          />
+          <input type="text" class="form--control" placeholder="Username/Email" />
           <p class="errorText error--user"></p>
           <input type="password" class="form--control" placeholder="Password" />
           <p class="errorText error--password"></p>
-
           <input type="submit" value="Sign In" />
+          <p class="errorText" id="invalidUserLogin"></p>
         </form>
         <span class="modal-close">X</span>
       </div>
     </div>
-
-
-
   </body>
 </html>

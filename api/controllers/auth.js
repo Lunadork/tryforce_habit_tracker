@@ -4,57 +4,61 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 
-async function register (req, res) 
+async function register(req, res) 
 {
     try 
     {
-        //req.body will contain: 'name', 'email', 'password'
+        //req.body will contain: 'username', 'email', 'password'
 
         let validRegex =
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (req.body.password.length < 8 || !validRegex.test(req.body.email)) {
-            console.log("Bad request from client, terminating user registration");
+        if (req.body.password.length < 8 || !validRegex.test(req.body.email) || /@/.test(req.body.username)) {
+            console.log("Client overrode client-side register form protection, terminating user registration");
             return;
         }
-        console.log("Now creating user at controller");
+        if (await User.getByUsername(req.body.username)) {
+            res.status(409).send("Username already taken!");
+            return;
+        }
+        if (await User.getByEmail(req.body.email)) {
+            res.status(409).send("Email already used!");
+            return;
+        }
+        console.log("\nNow creating user at controller");
         const salt = await bcrypt.genSalt();
         const hashed = await bcrypt.hash(req.body.password, salt);
         console.log("Pass salted and hashed")
-        const user = await User.create( {...req.body, password : hashed, salt: salt });
+        const user = await User.create( {...req.body, password : hashed});
         res.status(201).json(user);
     } 
     catch (err) 
     {
-        res.status(422).json({err});
+        res.status(500).json({err});
     }
 }
 
 
-async function login (req, res)
+async function login(req, res)
 {
     let user;
 
-    console.log(`User ${req.body.name} attempting to login with password ${req.body.password}`);
+    console.log(`User ${req.body.username} attempting to login with password ${req.body.password}`);
 
     try
     {
-        console.log("Finding now...")
-        user = await User.getByName(req.body.name);
-        console.log(user);
+        let debugString = '';
+        //req.body.username can be a username or email for this purpose
+        if (/@/.test(req.body.username)) {
+            user = await User.getByEmail(req.body.username);
+            debugString = 'email';
+        } else {
+            user = await User.getByUsername(req.body.username);
+            debugString = 'username';
+        }
         if (user)
         {
-            console.log("Found user on name: " + user.name);
-        }
-        else if (!user)
-        {
-            console.log("couldn't find user with name: " +req.body.name);
-            user = await User.getByEmail(req.body.name);
-            console.log("Found user on email: " + user.name);
-        }
-        else if (!user)
-        {
-            console.log("couldn't find user with email: " +req.body.name);
-            throw new Error ('Login error - invalid details');
+            console.log(`Found user by ${debugString}: ${req.body.username}`);
+            console.log(user);
         }
         else
         {
@@ -62,25 +66,19 @@ async function login (req, res)
             res.status(401).json({err});
         }
         
-        let salt = user.salt;
-
-        console.log("Salt to check: "+ salt);
-
-        const hashed = await bcrypt.hash(req.body.password, salt);
-        
-        const authed = await bcrypt.compare(hashed, user.password);
+        const authed = await bcrypt.compare(req.body.password, user.password);
 
         console.log("authed? " + authed)
 
-        if (!!authed)
+        if (authed)
         {
             console.log("Auth success, logging in")
-            const payload = { name: user.name, email: user.email};
+            const payload = {username: user.username, email: user.email};
             const sendToken = (err, token) =>
             {
                 if (err) {throw new Error ('Token Generation failed')}
                 console.log("sending token");
-                res.status(200).json({ success:true,  token: "Bearer " + token})
+                res.status(200).json({ success:true, id: user.id, token: token})
             }
             
             jwt.sign(payload, process.env.TOKENKEY, {expiresIn : 3600}, sendToken);
@@ -90,9 +88,9 @@ async function login (req, res)
             throw new Error ('User auth failed - controller');
         }       
     }
-    catch (err)
+    catch(err)
     {
-        console.log("somnething went wrong..");
+        console.log("something went wrong..");
         res.status(401).json({err});
     }
 
