@@ -139,7 +139,8 @@ form {
 
 form input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+select {
   border-radius: 2px;
   padding: 1rem;
   background-color: #0e5135;
@@ -149,6 +150,9 @@ input[type="password"] {
   margin-bottom: 1.5rem;
   outline: none;
   transition: all 0.15s, visibility 0s;
+}
+option {
+  width: 10%;
 }
 
 /* autofill */
@@ -297,9 +301,9 @@ form input[type="submit"]:hover {
 
 .modal--main {
   width: 40%;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
   overflow-y: scroll;
 }
 
@@ -475,6 +479,7 @@ h3 {
 
 .habit--content {
   padding: 1rem;
+  width: 100%;
 }
 
 .image--selected {
@@ -536,4 +541,9 @@ h3 {
   .habits--container {
     padding: 1rem;
   }
+}
+
+.form--habit {
+  width: 100%;
+  /* background-color: ; */
 }
