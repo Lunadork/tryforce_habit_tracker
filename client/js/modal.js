@@ -66,6 +66,7 @@ if (imageCont) {
   imageCont.addEventListener("click", getTrending);
 }
 
-function submitProfile() {
-  updateProfile(selectedImage)
+async function submitProfile() {
+  document.querySelector("#profilePicture").src = await updateProfile(selectedImage);
+  toggleModal();
 }
