@@ -237,6 +237,7 @@ form input[type="submit"]:hover {
   opacity: 0;
   transition: visibility 0s, opacity 0.5s;
   flex-direction: column;
+  z-index: 999;
 }
 
 .modal-submit {
@@ -251,7 +252,6 @@ form input[type="submit"]:hover {
 .modal {
   /* background-color: #00381c; */
   background-image: linear-gradient(#0e5135, #0d9263);
-
   width: 70%;
   height: 65%;
   border-radius: 10px;
@@ -395,7 +395,8 @@ footer p {
 /* Habit Cards */
 .habitCards {
   width: 40%;
-  border: 3px solid black;
+}
+.habits--container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -406,6 +407,7 @@ footer p {
   justify-content: space-between;
   align-items: center;
   background-color: rgb(135, 135, 135);
+  margin-bottom: 1.5rem;
   width: 80%;
   overflow: hidden;
   color: black;
@@ -484,4 +486,51 @@ h3 {
 .habits--title {
   text-align: center;
   font-size: 2.8rem;
+}
+
+@media screen and (max-width: 1550px) {
+  .habit {
+    width: 98%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main--top {
+    flex-direction: column;
+    /* align-items: center; */
+  }
+  .profile {
+    align-self: flex-start;
+    width: 25%;
+  }
+  .habitCards {
+    width: 100%;
+  }
+  .habits--container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .habit {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .habit {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .habit {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .habit {
+    width: 100%;
+  }
+  .habits--container {
+    padding: 1rem;
+  }
 }
