@@ -395,6 +395,10 @@ footer p {
 /* Habit Cards */
 .habitCards {
   width: 40%;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .habits--container {
   display: flex;
@@ -488,6 +492,7 @@ h3 {
   font-size: 2.8rem;
 }
 
+
 @media screen and (max-width: 1550px) {
   .habit {
     width: 98%;
@@ -534,3 +539,4 @@ h3 {
     padding: 1rem;
   }
 }
+
