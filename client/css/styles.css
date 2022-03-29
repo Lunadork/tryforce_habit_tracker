@@ -338,6 +338,7 @@ footer p {
   width: 20%;
   padding: 0.5rem;
   margin-top: 1rem;
+  height: 10%;
 }
 
 .profile--card {
@@ -394,6 +395,10 @@ footer p {
 /* Habit Cards */
 .habitCards {
   width: 40%;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .habit {
@@ -402,8 +407,6 @@ footer p {
   align-items: center;
   background-color: rgb(135, 135, 135);
   width: 80%;
-  margin-top: 1rem;
-  margin-left: 5rem;
   overflow: hidden;
   color: black;
   border-radius: 10px;
@@ -471,4 +474,14 @@ h3 {
 
 .image--selected {
   border: 3px solid lime;
+}
+
+/* layout for main */
+
+.main--top {
+  display: flex;
+}
+.habits--title {
+  text-align: center;
+  font-size: 2.8rem;
 }
