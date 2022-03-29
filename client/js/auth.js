@@ -48,7 +48,7 @@ async function userLogin(data)
         if (resultData.success) {
             //this is actually horrific practice. onwards!!
             localStorage.setItem('Bearer', resultData.token)
-            localStorage.setItem('username', data.username)
+            localStorage.setItem('id', resultData.id)
             return true;
         }
         return false;

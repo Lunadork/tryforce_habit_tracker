@@ -76,3 +76,8 @@ async function getHabitsForUser(id) {
     console.log(err);
   }
 }
+
+async function updateProfile() {
+
+
+}
