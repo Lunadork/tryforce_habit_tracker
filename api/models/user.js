@@ -7,21 +7,20 @@ module.exports = class User
     constructor(data)
     {
         this.id = data.id;
-        this.name = data.name;
+        this.username = data.username;
         this.email = data.email;
         this.password = data.password;
         this.rupees = data.rupees;
-        this.profilePic = data.profilePic;
+        this.profilepic = data.profilepic;
         this.xp = data.xp;
         this.xpTarget = data.xpTarget;
         this.level = data.level;
-
     }
 
 
     static get all()
     {
-        return new Promise (async (res, rej) => 
+        return new Promise(async (res, rej) => 
         {
             try 
             {
@@ -39,75 +38,76 @@ module.exports = class User
 
     static getById(id)
     {
-        return new Promise (async (res, rej) =>
+        return new Promise(async (res, rej) =>
         {
             try
             {
                 let userData = await db.query(`SELECT * FROM users WHERE id = $1;`, [id]);
-                res (userData.rows[0]);
+                res(userData.rows[0]);
             }
             catch (err)
             {
-                rej('User no findy');
+                res();
             }
         });
     }
 
-    static getByName(name)
+    static getByUsername(name)
     {
-        return new Promise (async (res, rej) =>
+        return new Promise(async (res, rej) =>
         {
             try
             {
-                let userData = await db.query(`SELECT * FROM users WHERE name = $1;`, [name]);
-                res (userData.rows[0]);
+                let userData = await db.query(`SELECT * FROM users WHERE username = $1;`, [name]);
+                res(new User(userData.rows[0]));
             }
             catch (err)
             {
-                rej('User no findy');
+                res();
             }
         });
     }
 
     static getByEmail(email)
     {
-        return new Promise (async (res, rej) =>
+        return new Promise(async (res, rej) =>
         {
             try
             {
                 let userData = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-                res (userData.rows[0]);
+                res(new User(userData.rows[0]));
             }
             catch (err)
             {
-                rej('User no findy');
+                res();
             }
         });
     }
 
-    static async create (userData)
+    static async create(userData)
     {
         console.log("Creating user at user model" + userData);
-        let { name, email, password, salt} = userData;
+        let { username, email, password} = userData;
         let rupees = 0;
         let profilePic = 0;
         let xp = 0;
         let xpTarget = 10;
         let level = 0;
 
-        console.log("name: " +name);
+        console.log("username: " +username);
         console.log("email: " +email);
         console.log("password: "  +password);
 
         return new Promise (async (res,rej) => 
         {
-            console.log("Try catch create user - user model")
+            //console.log("Try catch create user - user model")
             try 
             {
-                let result = await db.query(`INSERT INTO users (name, email, password, rupees, profilePic, xp, xpTarget, level, salt)
-                                                          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;`, 
-                                                          [name, email, password, rupees = 0, profilePic = 0, xp = 0, xpTarget = 10, level = 0, salt])
-                res(result.rows[0]);
+                let result = await db.query(`INSERT INTO users (username, email, password, rupees, profilePic, xp, xpTarget, level)
+                                                          VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;`, 
+                                                          [username, email, password, rupees, profilePic, xp, xpTarget, level])
+                console.log(`User created with ID: ${result.rows[0].id}`);
+                res(new User(result.rows[0]));
             }
             catch (err)
             {
@@ -116,9 +116,9 @@ module.exports = class User
         });
     }
 
-    destroy()
+    static destroy()
     {
-        return new Promise (async (res, rej) => 
+        return new Promise(async (res, rej) => 
         {
             try 
             {
@@ -143,16 +143,14 @@ module.exports = class User
         });
     }
 
-    update(updateData)
+    static update(updateData)
     {
-        let {id, profilePic} = updateData;
-
-        return new Promise (async (res, rej) => 
+        return new Promise(async (res, rej) => 
         {
             try 
             {
-                const result = await db.query('UPDATE users SET profilePic = $1 WHERE id = $2 RETURNING *;', [ profilePic, id ]);
-                res(result.rows[0])
+                const result = await db.query(`UPDATE users SET profilePic = $1 WHERE id = $2 RETURNING *;`, [ updateData.url, updateData.id ]);
+                res(new User(result.rows[0]));
             } 
             catch (err) 
             {
@@ -164,7 +162,7 @@ module.exports = class User
     static habits(id)
     {
 
-        return new Promise (async (res, rej) => 
+        return new Promise(async (res, rej) => 
         {
             try 
             {
