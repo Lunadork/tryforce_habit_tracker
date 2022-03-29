@@ -8,16 +8,6 @@ async function getAll(type) {
   }
 }
 
-async function getOne(type, id) {
-  try {
-    const response = await fetch(`${fetchString}/${id}`);
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 async function registerUser(data) {
   const options = {
     method: "POST",

@@ -4,6 +4,7 @@ const modalSubmit = document.querySelector(".modal-submit");
 const modalBg = document.querySelector(".modal-bg");
 const modal = document.querySelector(".modal");
 const imageCont = document.querySelector(".image--container");
+const profilePicture = document.querySelector("#profilePicture");
 
 const imageData = ["/images/link.png", "/images/link2.png", "/images/zelda.png", "/images/zeldacdi.jpg"];
 let selectedImage = imageData[0];
@@ -67,6 +68,18 @@ if (imageCont) {
 }
 
 async function submitProfile() {
-  document.querySelector("#profilePicture").src = await updateProfile(selectedImage);
+  profilePicture.src = await updateProfile(selectedImage);
+  localStorage.setItem('image', selectedImage)
   toggleModal();
 }
+
+async function pageLoad() {
+  //const pp = await getOne('users', localStorage.getItem('id')).profilepicture;
+  //console.log(pp)
+  //profilePicture.src = await getOne('users', localStorage.getItem('id')).profilepicture;
+
+  //hacky fixes until doing it properly
+  profilePicture.src = localStorage.getItem('image');
+}
+
+pageLoad();
