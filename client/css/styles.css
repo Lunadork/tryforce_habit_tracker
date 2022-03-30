@@ -21,7 +21,6 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   color: #f4efe5;
-  user-select: none;
 }
 
 h1,
@@ -480,6 +479,7 @@ h3 {
 
 .habit--content {
   padding: 1rem;
+  width: 100%;
 }
 
 .image--selected {
