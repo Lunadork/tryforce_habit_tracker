@@ -28,12 +28,10 @@ function renderHabits() {
         let current = progress.getAttribute("data-done");
         let resp = await updateHabitTimesDone(habit.id, "increment");
         if (resp.completed == true) {
-          console.log(resp.timesdone);
           progress.setAttribute("data-done", resp.timesdone);
           renderExp();
           renderBar();
         } else {
-          console.log("undef", resp.timesdone);
           let incremented = parseInt(current) + 1;
           progress.setAttribute("data-done", incremented);
           renderExp();
@@ -43,16 +41,22 @@ function renderHabits() {
         Alert("Error", error);
       }
     });
-    decrementor.addEventListener("click", () => {
-      let current = progress.getAttribute("data-done");
-      if (current == 0) {
-        renderExp();
-        renderBar();
-      } else {
-        let incremented = parseInt(current) - 1;
-        progress.setAttribute("data-done", incremented);
-        renderExp();
-        renderBar();
+    decrementor.addEventListener("click", async () => {
+      try {
+        let current = progress.getAttribute("data-done");
+        let resp = await updateHabitTimesDone(habit.id, "decrement");
+        if (resp.timesdone == 0) {
+          progress.setAttribute("data-done", resp.timesdone);
+          renderExp();
+          renderBar();
+        } else {
+          let incremented = parseInt(current) - 1;
+          progress.setAttribute("data-done", incremented);
+          renderExp();
+          renderBar();
+        }
+      } catch (error) {
+        Alert("Error", error);
       }
     });
 
