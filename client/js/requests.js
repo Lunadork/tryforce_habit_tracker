@@ -70,6 +70,23 @@ async function createHabit(title, frequency, category, id) {
   }
 }
 
+async function deleteHabit(id) {
+  console.log(id)
+  const options = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+    }),
+  }
+  try {
+    const response = await fetch(`${fetchString}/habits/${id}`, options);
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function getAll(type) {
   try {
     const res = await fetch(`${fetchString}/${type}/`);

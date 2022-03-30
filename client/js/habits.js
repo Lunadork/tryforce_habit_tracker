@@ -22,6 +22,7 @@ function renderHabits() {
     let decrementor =
       habit.firstElementChild.firstElementChild.nextElementSibling;
     let deleteButton = habit.lastElementChild.lastElementChild;
+    let deleteButtonTarget = document.querySelectorAll("#red--option");
 
     incrementor.addEventListener("click", () => {
       let current = progress.getAttribute("data-done");
@@ -52,8 +53,20 @@ function renderHabits() {
       }
     });
 
-    deleteButton.addEventListener("click", () => {
-      habit.remove();
+    deleteButton.addEventListener("click", (e) => {
+      //prepare for vomit code
+      let habitId;
+      if (e.target.hasAttribute("habit")) {
+        habitId = e.target.getAttribute("habit");
+      } else if (e.target.parentNode.hasAttribute("habit")) {
+        habitId = e.target.parentNode.getAttribute("habit");
+      } else {
+        habitId = e.target.parentNode.parentNode.getAttribute("habit");
+      }
+      console.log(e.target)
+      console.log(habitId)
+      //deleteHabit(e.target.parentNode.parentNode.id);
+      //habit.remove();
     });
 
     function renderBar() {
