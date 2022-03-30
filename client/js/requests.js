@@ -59,9 +59,9 @@ async function createHabit(title, frequency, category, id) {
       id: id,
       title: title,
       frequency: frequency,
-      category: category
+      category: category,
     }),
-  }
+  };
   try {
     const response = await fetch(`${fetchString}/habits/${id}`, options);
     return await response.json();
@@ -71,36 +71,33 @@ async function createHabit(title, frequency, category, id) {
 }
 
 async function deleteHabit(id) {
-  console.log(id)
+  console.log(id);
   const options = {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       id: id,
     }),
-  }
+  };
   try {
     const response = await fetch(`${fetchString}/habits/${id}`, options);
-    return;
+    return response;
   } catch (err) {
     console.log(err);
   }
 }
 
-async function updateHabitTimesDone(id)
-{
-  const options = 
-  {
+async function updateHabitTimesDone(id) {
+  const options = {
     method: "PUT",
-    headers: {"Content-Type" : "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      id: id
-    })
-  }
+      id: id,
+    }),
+  };
   const response = await fetch(`${fetchString}/habits/${id}}`, options);
   const data = await response.json();
   return data;
-
 }
 
 async function getOne(type, id) {
@@ -129,12 +126,12 @@ async function updateProfile(id, profilePic) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       id: id,
-      profilePic: profilePic
+      profilePic: profilePic,
     }),
   };
-    const response = await fetch(`${fetchString}/users/${id}}`, options);
-    const json = await response.json();
-    return json.profilepic;
+  const response = await fetch(`${fetchString}/users/${id}}`, options);
+  const json = await response.json();
+  return json.profilepic;
 }
 
 async function getLevels() {

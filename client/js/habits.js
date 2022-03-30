@@ -53,7 +53,7 @@ function renderHabits() {
       }
     });
 
-    deleteButton.addEventListener("click", (e) => {
+    deleteButton.addEventListener("click", async (e) => {
       //prepare for vomit code
       let habitId;
       if (e.target.hasAttribute("habit")) {
@@ -63,8 +63,12 @@ function renderHabits() {
       } else {
         habitId = e.target.parentNode.parentNode.getAttribute("habit");
       }
-      deleteHabit(habitId);
-      habit.remove();
+      let resp = await deleteHabit(habitId);
+      if (resp.status == 204) {
+        habit.remove();
+      } else {
+        alert("Error Removing");
+      }
     });
 
     function renderBar() {
