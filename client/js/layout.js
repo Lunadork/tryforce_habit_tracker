@@ -18,7 +18,7 @@ async function initLoad() {
   }
 }
 
-function generateHabit({ title, category, id, frequency, streak }) {
+function generateHabit({ title, category, id, frequency, timesdone }) {
   let habit = document.createElement("div");
   habit.classList.add("habit");
   habit.setAttribute("id", id);
@@ -36,7 +36,7 @@ function generateHabit({ title, category, id, frequency, streak }) {
     <h3>Daily Tracker:</h3>
     <div class="progress">
       <span class="progress--indicator"></span>
-      <div class="progress--done" data-done=${streak}></div>
+      <div class="progress--done" data-done=${timesdone}></div>
     </div>
     <h3>Overall Completion:</h3>
     <div class="progress">

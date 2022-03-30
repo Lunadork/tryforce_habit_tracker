@@ -23,18 +23,24 @@ function renderHabits() {
     let deleteButton = habit.lastElementChild.lastElementChild;
     let deleteButtonTarget = document.querySelectorAll("#red--option");
 
-    incrementor.addEventListener("click", () => {
-      let current = progress.getAttribute("data-done");
-      if (current == currentTarget) {
-        renderExp();
-        renderBar();
-      } else {
-        let incremented = parseInt(current) + 1;
-        progress.setAttribute("data-done", incremented);
-        renderExp();
-        renderBar();
-
-        console.log(progress, indicator);
+    incrementor.addEventListener("click", async () => {
+      try {
+        let current = progress.getAttribute("data-done");
+        let resp = await updateHabitTimesDone(habit.id, "increment");
+        if (resp.completed == true) {
+          console.log(resp.timesdone);
+          progress.setAttribute("data-done", resp.timesdone);
+          renderExp();
+          renderBar();
+        } else {
+          console.log("undef", resp.timesdone);
+          let incremented = parseInt(current) + 1;
+          progress.setAttribute("data-done", incremented);
+          renderExp();
+          renderBar();
+        }
+      } catch (error) {
+        Alert("Error", error);
       }
     });
     decrementor.addEventListener("click", () => {
@@ -47,8 +53,6 @@ function renderHabits() {
         progress.setAttribute("data-done", incremented);
         renderExp();
         renderBar();
-
-        console.log(progress, indicator);
       }
     });
 
@@ -73,7 +77,6 @@ function renderHabits() {
     function renderBar() {
       progress.style.opacity = 1;
       let currentValue = parseInt(progress.getAttribute("data-done"));
-      console.log(currentValue, currentTarget);
 
       progress.style.width =
         Math.floor((currentValue / currentTarget) * 100) + "%";
