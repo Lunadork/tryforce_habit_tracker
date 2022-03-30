@@ -93,7 +93,10 @@ function renderHabits() {
       }
       let resp = await deleteHabit(habitId);
       if (resp.status == 204) {
-        habit.remove();
+        habit.classList.add("deleted");
+        setTimeout(() => {
+          habit.remove();
+        }, 100);
       } else {
         alert("Error Removing");
       }
