@@ -87,16 +87,6 @@ async function deleteHabit(id) {
   }
 }
 
-async function getAll(type) {
-  try {
-    const res = await fetch(`${fetchString}/${type}/`);
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 async function getOne(type, id) {
   try {
     const response = await fetch(`${fetchString}/${type}/${id}`);
