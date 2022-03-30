@@ -8,7 +8,7 @@ const profilePicture = document.querySelector("#profilePicture");
 
 let imageData = [];
 let selectedImage = 0;
-const id = parseInt(localStorage.getItem('id'));
+const id = parseInt(localStorage.getItem("id"));
 
 modalBtn.addEventListener("click", toggleModal);
 
@@ -61,7 +61,7 @@ function getTrending() {
         item.classList.remove("image--selected");
       }
       e.target.classList.add("image--selected");
-      
+
       selectedImage = image.id;
     });
     document.querySelector(".modal--content").append(image);
@@ -80,8 +80,8 @@ async function submitProfile() {
 
 async function pageLoad() {
   imageData = await getAllPfps();
-  const userData = await getOne('users', id);
-  profilePicture.src = imageData.find(e => e.id == userData.profilepic).src;
+  const userData = await getOne("users", id);
+  profilePicture.src = imageData.find((e) => e.id == userData.profilepic).src;
 }
 
 pageLoad();
@@ -101,7 +101,7 @@ function toggleForm() {
   <form class="form--habit">
     <input type="text" class="form--control" placeholder="Habit Title" name="title" id="newHabitTitle" />
     <p class="errorText error--habit"></p>
-    <input type="text" class="form--control" name="frequency" id="newHabitFrequency" placeholder="Frequency - e.g 1yr 2mo 1w 4d 3h 2m 1s" />
+    <input type="number" class="form--control" name="frequency" id="newHabitFrequency" placeholder="Frequency" />
     <p class="errorText error--time"></p>
 
     <select class="form--control" name="categories" id="newHabitCategories">
@@ -118,11 +118,16 @@ function toggleForm() {
     const newHabitTitle = document.querySelector("#newHabitTitle");
     const newHabitFrequency = document.querySelector("#newHabitFrequency");
     const newHabitCategories = document.querySelector("#newHabitCategories");
-    let result = await createHabit(newHabitTitle.value, newHabitFrequency.value, newHabitCategories.value, id);
+    let result = await createHabit(
+      newHabitTitle.value,
+      newHabitFrequency.value,
+      newHabitCategories.value,
+      id
+    );
     if (result.success) {
       location.reload();
     } else {
-      switch(result.error) {
+      switch (result.error) {
         case "invalid format":
           break;
       }
