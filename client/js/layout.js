@@ -1,10 +1,11 @@
 window.onload = initLoad;
 async function initLoad() {
   try {
-    let data = await getHabitsForUser(localStorage.getItem('id'));
+    let data = await getHabitsForUser(localStorage.getItem("id"));
     console.log(data);
     let habits = [];
     data.forEach((habit) => {
+      console.log(habit);
       let generatedHabit = generateHabit(habit);
       habits.push(generatedHabit);
     });

@@ -4,9 +4,8 @@ function renderHabits() {
     let progress = habit.getElementsByClassName("progress--done")[0];
 
     // Getting daily counter using frequency (86400 seconds in 24 hrs)
-    let currentTarget = Math.floor(
-      86400 / habit.getAttribute("data-frequency")
-    );
+    let currentTarget = habit.getAttribute("data-frequency");
+
     let indicator = progress.previousElementSibling;
     let overallProgress = habit.getElementsByClassName("progress--done")[1];
     let overallIndicator = overallProgress.previousElementSibling;
