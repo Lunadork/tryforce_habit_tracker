@@ -63,10 +63,8 @@ function renderHabits() {
       } else {
         habitId = e.target.parentNode.parentNode.getAttribute("habit");
       }
-      console.log(e.target)
-      console.log(habitId)
-      //deleteHabit(e.target.parentNode.parentNode.id);
-      //habit.remove();
+      deleteHabit(habitId);
+      habit.remove();
     });
 
     function renderBar() {

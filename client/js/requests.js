@@ -81,7 +81,7 @@ async function deleteHabit(id) {
   }
   try {
     const response = await fetch(`${fetchString}/habits/${id}`, options);
-    return await response.json();
+    return;
   } catch (err) {
     console.log(err);
   }
