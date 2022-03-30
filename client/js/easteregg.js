@@ -1,5 +1,11 @@
 let log = "";
-const code = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter"
+
+const konamiCode = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter";
+const zeldasLullaby = "ArrowLeftArrowUpArrowRightArrowLeftArrowUpArrowRight";
+const eponasSong = "ArrowUpArrowLeftArrowRightArrowUpArrowLeftArrowRight";
+const conditions = {konamiCode: konamiCode, zeldasLullaby: zeldasLullaby, eponasSong: eponasSong};
+
+let selectedCode = "";
 document.addEventListener("keydown", logKey);
 
 function logKey(e) {
@@ -8,24 +14,41 @@ function logKey(e) {
 	} else {
 		log += e.key;
 	}
-	if (log == code) {
-		var itemget = new Audio('../itemget.mp3');
-		itemget.play();
-		setTimeout(redirect, 2200);
-	} 
+	for (const code in conditions) {
+		if (log == conditions[code]) {
+				selectedCode = code;
+				const itemget = new Audio('../itemget.mp3');
+				itemget.play();
+				setTimeout(redirect, 2200);
+		}
+	}
 	resetLog(e.key);
 	console.log(log)
 }
 
-function resetLog(key) {
-	if (!code.startsWith(log)) {
-		log = "";
-		if (key == 'ArrowUp') {
-			log += key;
+function resetLog(key, code) {
+	willReset = true;
+	for (const code in conditions) {
+		if (conditions[code].startsWith(log)) {
+			willReset = false;
 		}
+	}
+	if (willReset) {
+		log = "";
+		log += key;
 	}
 }
 
 function redirect() {
-	window.location.href = "https://www.youtube.com/watch?v=0m9QUoW5KnY";
+	switch (selectedCode) {
+		case 'konamiCode':
+			window.location.href = "https://www.youtube.com/watch?v=0m9QUoW5KnY";
+			break;
+		case 'zeldasLullaby':
+			window.location.href = "https://www.youtube.com/watch?v=h2Lw9Zs98Gg";
+			break;
+		case 'eponasSong':
+			window.location.href = "https://youtu.be/keAE9GXYB0w?t=7";
+			break;
+	}
 }
