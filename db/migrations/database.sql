@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS profilePics;
 CREATE TABLE profilePics
 (
     id serial PRIMARY KEY,
-    src VARCHAR(500)
+    src VARCHAR
 );
 
 DROP TABLE IF EXISTS users;
@@ -37,11 +37,14 @@ DROP TABLE IF EXISTS habits;
 CREATE TABLE habits
 (
     id serial PRIMARY KEY,
-    user_id int,
+    user_id int NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    title VARCHAR(250),
-    frequency int,
-    timestampOfLastTrack timestamp,
+    title VARCHAR(250) NOT NULL,
+    frequency int NOT NULL,
     streak int,
-    category VARCHAR(250)
+    category VARCHAR,
+    timesdone int,
+    completed boolean,
+    daysexist int,
+    dayscompleted int
 );
