@@ -10,7 +10,7 @@ let imageData = [];
 let selectedImage = 0;
 const id = parseInt(localStorage.getItem("id"));
 
-modalBtn.addEventListener("click", toggleModal);
+modalBtn ? modalBtn.addEventListener("click", toggleModal) : null;
 
 modalClose.addEventListener("click", toggleModal);
 

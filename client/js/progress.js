@@ -35,6 +35,6 @@ function renderExp() {
 
 renderExp();
 
-document.querySelector(".btn--log").addEventListener("click", () => {
+document.querySelector(".btn--logOut").addEventListener("click", () => {
   document.location.href = "index.html";
 });
