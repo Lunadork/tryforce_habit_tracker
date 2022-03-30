@@ -1,12 +1,18 @@
 window.onload = initLoad;
 async function initLoad() {
+  document.querySelector(".habits--container").innerHTML = "";
   try {
     let data = await getHabitsForUser(localStorage.getItem("id"));
     console.log(data);
     let habits = [];
     data.forEach((habit) => {
-      console.log(habit);
-      let generatedHabit = generateHabit(habit);
+      let generatedHabit = generateHabit({
+        ...habit,
+        overall:
+          habit.dayscompleted == 0
+            ? 0
+            : Math.floor((habit.daysexist + 1) / habit.dayscompleted),
+      });
       habits.push(generatedHabit);
     });
     habits.forEach((habit) => {
@@ -18,11 +24,21 @@ async function initLoad() {
   }
 }
 
-function generateHabit({ title, category, id, frequency, timesdone }) {
+function generateHabit({
+  title,
+  category,
+  id,
+  frequency,
+  timesdone,
+  overall,
+  completed,
+}) {
   let habit = document.createElement("div");
   habit.classList.add("habit");
   habit.setAttribute("id", id);
+  habit.setAttribute("completed", completed);
   habit.setAttribute("data-frequency", frequency);
+
   habit.innerHTML = `
     <div class="habit--options">
     <button>+</button>
@@ -41,7 +57,7 @@ function generateHabit({ title, category, id, frequency, timesdone }) {
     <h3>Overall Completion:</h3>
     <div class="progress">
       <span class="progress--indicator"></span>
-      <div class="progress--done" ></div>
+      <div data-done=${overall}  class="progress--done" ></div>
     </div>
   </div>
   <div class="options--red habit--options">

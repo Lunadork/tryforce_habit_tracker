@@ -10,9 +10,6 @@ function renderHabits() {
     let overallProgress = habit.getElementsByClassName("progress--done")[1];
     let overallIndicator = overallProgress.previousElementSibling;
 
-    overallProgress.style.width = "100%";
-    overallProgress.style.opacity = "100%";
-
     renderExp();
     renderBar();
     renderOverall();
@@ -29,8 +26,19 @@ function renderHabits() {
         let resp = await updateHabitTimesDone(habit.id, "increment");
         if (resp.completed == true) {
           progress.setAttribute("data-done", resp.timesdone);
+          overallProgress.setAttribute("data-done", 1);
+          habit.setAttribute("completed", true);
+
+          if (!habit.parentElement.classList.contains("habits--completed")) {
+            habit.classList.add("appended");
+          }
+          document.querySelector(".habits--completed").append(habit);
+          setTimeout(() => {
+            habit.classList.remove("appended");
+          }, 250);
           renderExp();
           renderBar();
+          renderOverallTimeout();
         } else {
           let incremented = parseInt(current) + 1;
           progress.setAttribute("data-done", incremented);
@@ -45,6 +53,19 @@ function renderHabits() {
       try {
         let current = progress.getAttribute("data-done");
         let resp = await updateHabitTimesDone(habit.id, "decrement");
+        if (habit.getAttribute("completed") == "true") {
+          overallProgress.setAttribute("data-done", 0);
+
+          if (habit.parentElement.classList.contains("habits--completed")) {
+            habit.classList.add("appended");
+          }
+          document.querySelector(".habits--container").append(habit);
+          setTimeout(() => {
+            habit.classList.remove("appended");
+          }, 250);
+
+          renderOverallTimeout();
+        }
         if (resp.timesdone == 0) {
           progress.setAttribute("data-done", resp.timesdone);
           renderExp();
@@ -86,7 +107,19 @@ function renderHabits() {
         Math.floor((currentValue / currentTarget) * 100) + "%";
     }
     function renderOverall() {
-      overallIndicator.innerHTML = `100%`;
+      let percent = overallProgress.getAttribute("data-done") * 100;
+      overallProgress.style.width = `${percent}%`;
+      overallProgress.style.opacity = "100%";
+      overallIndicator.innerHTML = `${percent}%`;
+    }
+
+    function renderOverallTimeout() {
+      setTimeout(() => {
+        let percent = overallProgress.getAttribute("data-done") * 100;
+        overallProgress.style.width = `${percent}%`;
+        overallProgress.style.opacity = "100%";
+        overallIndicator.innerHTML = `${percent}%`;
+      }, 100);
     }
 
     function renderExp() {

@@ -548,3 +548,19 @@ h3 {
   width: 100%;
   /* background-color: ; */
 }
+
+@keyframes append-animate {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.appended {
+  animation: append-animate 0.3s;
+  /* transition: all 0.3s; */
+}
