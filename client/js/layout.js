@@ -16,7 +16,12 @@ async function initLoad() {
       habits.push(generatedHabit);
     });
     habits.forEach((habit) => {
-      document.querySelector(".habits--container").appendChild(habit);
+      console.log(habit);
+      if (habit.getAttribute("completed") == "true") {
+        document.querySelector(".habits--completed").appendChild(habit);
+      } else {
+        document.querySelector(".habits--container").appendChild(habit);
+      }
     });
     renderHabits();
   } catch (e) {
