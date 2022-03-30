@@ -82,6 +82,7 @@ async function pageLoad() {
   imageData = await getAllPfps();
   const userData = await getOne("users", id);
   profilePicture.src = imageData.find((e) => e.id == userData.profilepic).src;
+  document.querySelector("#playerName").textContent = userData.username;
 }
 
 pageLoad();
