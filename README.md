@@ -9,6 +9,8 @@ Gamified habit tracking application
 * postgreSQL
 * Docker
 * Express.js
+* Node-Cron
+* nodemailer
 
 ## Process
 We began by brainstorming all the ideas for the application. We came up with this to begin with:
