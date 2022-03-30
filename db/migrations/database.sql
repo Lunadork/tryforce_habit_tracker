@@ -39,7 +39,7 @@ CREATE TABLE habits
     id serial PRIMARY KEY,
     user_id int NOT NULL,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    title VARCHAR(250) NOT NULL,
+    title VARCHAR(50) NOT NULL,
     frequency int NOT NULL,
     streak int,
     category VARCHAR,
