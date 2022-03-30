@@ -58,17 +58,23 @@ header {
   text-shadow: 1px 1px 2px #ccc, 0 0 1em #ccc, 0 0 0.2em #ccc;
 }
 
-.btn--log {
+.btn {
   background-color: #4aba91;
   border-radius: 2px;
   border: 1px solid transparent;
   outline: none;
   padding: 1rem;
-  margin-right: 6rem;
   cursor: pointer;
   transition: all 0.15s;
 }
-
+.btn--log {
+  margin-right: 6rem;
+}
+.btn--add {
+  padding: 1rem 1.5rem;
+  align-self: center;
+  margin-right: 4rem;
+}
 .btn--log:hover {
   box-shadow: 0 0 5px 1px black;
 }
@@ -282,14 +288,46 @@ form input[type="submit"]:hover {
   display: flex;
   justify-content: space-between;
 } */
-
+.modal--main {
+  width: 50%;
+  padding: 4rem;
+  overflow-y: scroll;
+}
+@media screen and (max-width: 1200px) {
+  .modal--main {
+    width: 50%;
+    height: 55%;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 @media screen and (max-width: 950px) {
   .modal {
-    height: 50%;
+    height: 55%;
+    width: 60%;
+  }
+}
+@media screen and (max-width: 750px) {
+  .modal {
+    height: 70%;
+    width: 70%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .modal {
+    height: 70%;
+    width: 80%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .modal {
+    height: 70%;
     width: 90%;
   }
 }
-@media screen and (min-height: 900px) and (min-width: 1050px) {
+@media screen and (min-height: 900px) {
   .modal {
     height: 50%;
     width: 40%;
@@ -298,14 +336,6 @@ form input[type="submit"]:hover {
     flex-direction: column;
     justify-content: center;
   }
-}
-
-.modal--main {
-  width: 40%;
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; */
-  overflow-y: scroll;
 }
 
 .modal--content img {
@@ -337,27 +367,34 @@ footer p {
 
 /* Profile Section */
 
-.profile {
+.top--container {
+  display: flex;
   background-color: #00381c;
-  width: 20%;
+  width: 100%;
   padding: 0.5rem;
-  margin-top: 1rem;
   height: 10%;
+  justify-content: space-between;
 }
-
+.profile {
+  width: 40%;
+}
 .profile--card {
+  display: flex;
   border: 2px solid black;
   width: 100%;
   overflow: hidden;
   background-color: #0e5135;
 }
 .image--container {
+  flex: 2.5;
   background-color: #0d9263;
   display: flex;
   justify-content: center;
+  padding: 1rem;
   cursor: pointer;
 }
 .profile--content {
+  flex: 4;
   padding: 1rem;
 }
 
@@ -403,7 +440,12 @@ footer p {
   flex-direction: column;
   align-items: center;
 }
+
 .habits--container {
+  background: rgba(79, 91, 102, 0.8);
+  border-radius: 10px;
+  padding: 2rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -491,6 +533,9 @@ h3 {
 
 .main--top {
   display: flex;
+  justify-content: space-around;
+  padding-bottom: 4rem;
+  /* height: 100vh; */
 }
 .habits--title {
   text-align: center;
@@ -508,8 +553,7 @@ h3 {
     /* align-items: center; */
   }
   .profile {
-    align-self: flex-start;
-    width: 25%;
+    width: 50%;
   }
   .habitCards {
     width: 100%;
@@ -518,6 +562,7 @@ h3 {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    height: 10%;
   }
   .habit {
     width: 48%;
@@ -526,18 +571,30 @@ h3 {
 
 @media screen and (max-width: 1000px) {
   .habit {
-    width: 60%;
+    width: 90%;
+  }
+  .habits--container {
+    width: 80%;
   }
 }
 
 @media screen and (max-width: 750px) {
   .habit {
-    width: 80%;
+    width: 100%;
+  }
+  .habits--container {
+    width: 100%;
+  }
+  .profile {
+    width: 65%;
   }
 }
 @media screen and (max-width: 650px) {
   .habit {
     width: 100%;
+  }
+  .profile {
+    width: 75%;
   }
   .habits--container {
     padding: 1rem;

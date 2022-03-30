@@ -104,7 +104,7 @@ function toggleForm() {
     <input type="number" class="form--control" name="frequency" id="newHabitFrequency" placeholder="Frequency" />
     <p class="errorText error--time"></p>
 
-    <select class="form--control" name="categories" id="newHabitCategories">
+    <select class="form--control" name="categories" required id="newHabitCategories">
       <option value="" disabled selected>Select Category</option>
       <option value="lifestyle">Lifestyle</option>
       <option value="fitness">Fitness</option>
