@@ -51,9 +51,23 @@ async function registerUser(data) {
   }
 }
 
-//TO AMEND WITH PROPER INTAKE OF DATA DEPENDING ON HOW WE DO IT
-async function createHabit(title, frequency, categories, submit) {
-  
+async function createHabit(title, frequency, category, id) {
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      title: title,
+      frequency: frequency,
+      category: category
+    }),
+  }
+  try {
+    const response = await fetch(`${fetchString}/habits/${id}`, options);
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 async function getAll(type) {

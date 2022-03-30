@@ -113,15 +113,21 @@ function toggleForm() {
     <input type="submit" value="Submit" id="newHabitSubmit" />
   </form>
 `;
+  let newHabitSubmit = document.querySelector("#newHabitSubmit");
+  newHabitSubmit.addEventListener("click", async (e) => {
+    const newHabitTitle = document.querySelector("#newHabitTitle");
+    const newHabitFrequency = document.querySelector("#newHabitFrequency");
+    const newHabitCategories = document.querySelector("#newHabitCategories");
+    let result = await createHabit(newHabitTitle.value, newHabitFrequency.value, newHabitCategories.value, id);
+    if (result.success) {
+      location.reload();
+    } else {
+      switch(result.error) {
+        case "invalid format":
+          break;
+      }
+    }
+  });
 }
 
 // Regex for time :^([0-1]?\d|2[0-3])(?::([0-5]?\d))?(?::([0-5]?\d))?$
-const newHabitTitle = document.querySelector("#newHabitTitle");
-const newHabitFrequency = document.querySelector("#newHabitFrequency");
-const newHabitCategories = document.querySelector("#newHabitCategories");
-const newHabitSubmit = document.querySelector("#newHabitSubmit");
-
-newHabitSubmit.addEventListener("click", async (e) => {
-  createHabit(newHabitTitle.value, newHabitFrequency.value, newHabitCategories.value);
-  location.reload();
-});
