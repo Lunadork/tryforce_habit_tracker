@@ -52,7 +52,9 @@ async function registerUser(data) {
 }
 
 //TO AMEND WITH PROPER INTAKE OF DATA DEPENDING ON HOW WE DO IT
-async function createHabit(e) {}
+async function createHabit(title, frequency, categories, submit) {
+  
+}
 
 async function getAll(type) {
   try {

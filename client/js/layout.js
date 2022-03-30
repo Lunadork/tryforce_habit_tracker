@@ -1,7 +1,7 @@
 window.onload = initLoad;
 async function initLoad() {
   try {
-    let data = await getHabitsForUser(1);
+    let data = await getHabitsForUser(localStorage.getItem('id'));
     console.log(data);
     let habits = [];
     data.forEach((habit) => {
