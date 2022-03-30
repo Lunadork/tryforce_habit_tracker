@@ -548,3 +548,34 @@ h3 {
   width: 100%;
   /* background-color: ; */
 }
+
+@keyframes append-animate {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes append-out {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.appended {
+  animation: append-animate 0.3s;
+  /* transition: all 0.3s; */
+}
+
+.deleted {
+  animation: append-out 0.3s;
+}

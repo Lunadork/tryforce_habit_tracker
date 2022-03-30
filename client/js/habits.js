@@ -4,15 +4,11 @@ function renderHabits() {
     let progress = habit.getElementsByClassName("progress--done")[0];
 
     // Getting daily counter using frequency (86400 seconds in 24 hrs)
-    let currentTarget = Math.floor(
-      86400 / habit.getAttribute("data-frequency")
-    );
+    let currentTarget = habit.getAttribute("data-frequency");
+
     let indicator = progress.previousElementSibling;
     let overallProgress = habit.getElementsByClassName("progress--done")[1];
     let overallIndicator = overallProgress.previousElementSibling;
-
-    overallProgress.style.width = "100%";
-    overallProgress.style.opacity = "100%";
 
     renderExp();
     renderBar();
@@ -24,32 +20,64 @@ function renderHabits() {
     let deleteButton = habit.lastElementChild.lastElementChild;
     let deleteButtonTarget = document.querySelectorAll("#red--option");
 
-    incrementor.addEventListener("click", () => {
-      let current = progress.getAttribute("data-done");
-      if (current == currentTarget) {
-        renderExp();
-        renderBar();
-      } else {
-        let incremented = parseInt(current) + 1;
-        progress.setAttribute("data-done", incremented);
-        renderExp();
-        renderBar();
+    incrementor.addEventListener("click", async () => {
+      try {
+        let current = progress.getAttribute("data-done");
+        let resp = await updateHabitTimesDone(habit.id, "increment");
+        if (resp.completed == true) {
+          progress.setAttribute("data-done", resp.timesdone);
+          overallProgress.setAttribute("data-done", 1);
+          habit.setAttribute("completed", true);
 
-        console.log(progress, indicator);
+          if (!habit.parentElement.classList.contains("habits--completed")) {
+            habit.classList.add("appended");
+          }
+          document.querySelector(".habits--completed").append(habit);
+          setTimeout(() => {
+            habit.classList.remove("appended");
+          }, 250);
+          renderExp();
+          renderBar();
+          renderOverallTimeout();
+        } else {
+          let incremented = parseInt(current) + 1;
+          progress.setAttribute("data-done", incremented);
+          renderExp();
+          renderBar();
+        }
+      } catch (error) {
+        Alert("Error", error);
       }
     });
-    decrementor.addEventListener("click", () => {
-      let current = progress.getAttribute("data-done");
-      if (current == 0) {
-        renderExp();
-        renderBar();
-      } else {
-        let incremented = parseInt(current) - 1;
-        progress.setAttribute("data-done", incremented);
-        renderExp();
-        renderBar();
+    decrementor.addEventListener("click", async () => {
+      try {
+        let current = progress.getAttribute("data-done");
+        let resp = await updateHabitTimesDone(habit.id, "decrement");
+        if (habit.getAttribute("completed") == "true") {
+          overallProgress.setAttribute("data-done", 0);
 
-        console.log(progress, indicator);
+          if (habit.parentElement.classList.contains("habits--completed")) {
+            habit.classList.add("appended");
+          }
+          document.querySelector(".habits--container").append(habit);
+          setTimeout(() => {
+            habit.classList.remove("appended");
+          }, 250);
+
+          renderOverallTimeout();
+        }
+        if (resp.timesdone == 0) {
+          progress.setAttribute("data-done", resp.timesdone);
+          renderExp();
+          renderBar();
+        } else {
+          let incremented = parseInt(current) - 1;
+          progress.setAttribute("data-done", incremented);
+          renderExp();
+          renderBar();
+        }
+      } catch (error) {
+        Alert("Error", error);
       }
     });
 
@@ -65,7 +93,10 @@ function renderHabits() {
       }
       let resp = await deleteHabit(habitId);
       if (resp.status == 204) {
-        habit.remove();
+        habit.classList.add("deleted");
+        setTimeout(() => {
+          habit.remove();
+        }, 100);
       } else {
         alert("Error Removing");
       }
@@ -74,13 +105,24 @@ function renderHabits() {
     function renderBar() {
       progress.style.opacity = 1;
       let currentValue = parseInt(progress.getAttribute("data-done"));
-      console.log(currentValue, currentTarget);
 
       progress.style.width =
         Math.floor((currentValue / currentTarget) * 100) + "%";
     }
     function renderOverall() {
-      overallIndicator.innerHTML = `100%`;
+      let percent = overallProgress.getAttribute("data-done") * 100;
+      overallProgress.style.width = `${percent}%`;
+      overallProgress.style.opacity = "100%";
+      overallIndicator.innerHTML = `${percent}%`;
+    }
+
+    function renderOverallTimeout() {
+      setTimeout(() => {
+        let percent = overallProgress.getAttribute("data-done") * 100;
+        overallProgress.style.width = `${percent}%`;
+        overallProgress.style.opacity = "100%";
+        overallIndicator.innerHTML = `${percent}%`;
+      }, 100);
     }
 
     function renderExp() {
