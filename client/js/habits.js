@@ -12,6 +12,7 @@ function renderHabits() {
 
     renderExp();
     renderBar();
+    renderExpIndicator();
     renderBarText();
     renderOverall();
 
@@ -145,6 +146,7 @@ function renderHabits() {
       }, 100);
     }
 
+    //this renders the text for the first value 'daily tracker'
     function renderExpIndicator() {
       let currentValue = parseInt(progress.getAttribute("data-done"));
       indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
