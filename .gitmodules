@@ -1,3 +1,6 @@
 [submodule "api"]
 	path = api
 	url = https://github.com/nottnottloop/tryforce_habit_tracker_server
+[submodule "client"]
+	path = client
+	url = https://github.com/nottnottloop/tryforce_habit_tracker_client.git
