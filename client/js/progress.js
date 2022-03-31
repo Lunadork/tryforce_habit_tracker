@@ -22,7 +22,13 @@ async function renderExp() {
       previousTarget = currentTarget;
       currentTarget = Math.ceil(currentTarget * 1.5);
       document.querySelector("#playerLevel").textContent = `Level: ${++currentLevel}`;
-      progress.style.width = 0;
+      renderBar();
+      return renderExp();
+    }
+    while (currentXp <= previousTarget) {
+      currentTarget = previousTarget;
+      previousTarget = Math.ceil(currentTarget / 1.5);
+      document.querySelector("#playerLevel").textContent = `Level: ${--currentLevel}`;
       return renderExp();
     }
     indicator.innerHTML = `EXP: ${currentXp}/${currentTarget} (${Math.floor(
