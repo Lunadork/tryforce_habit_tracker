@@ -48,14 +48,18 @@ async function renderExp() {
 
 async function refreshXp() {
   const userData = await getOne("users", localStorage.getItem("id"));
+  if (
+    userData.level >
+    parseInt(document.querySelector("#playerLevel").textContent)
+  ) {
+    alert("level up");
+  }
   currentXp = userData.xp;
   currentTarget = userData.xptarget;
   document.querySelector(
     "#playerRupees"
   ).textContent = `Rupees: ${userData.rupees}`;
-  document.querySelector(
-    "#playerLevel"
-  ).textContent = `Level: ${userData.level}`;
+  document.querySelector("#playerLevel").textContent = `${userData.level}`;
 }
 
 renderExp();
