@@ -94,7 +94,7 @@ async function updateHabitTimesDone(id, operation, userid) {
     body: JSON.stringify({
       id: id,
       operation: operation,
-      userid: userid
+      userid: userid,
     }),
   };
   const response = await fetch(`${fetchString}/habits/${id}}`, options);
@@ -149,6 +149,18 @@ async function getLevels() {
 async function getLevelsById(id) {
   try {
     const response = await fetch(`${fetchString}/game/levels/${id}`);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function addXp(id) {
+  try {
+    const response = await fetch(`${fetchString}/users/${id}/addXp`, {
+      method: "PUT",
+    });
     const data = await response.json();
     return data;
   } catch (err) {

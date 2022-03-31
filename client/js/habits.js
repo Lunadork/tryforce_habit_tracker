@@ -38,6 +38,8 @@ function renderHabits() {
           "increment",
           localStorage.getItem("id")
         );
+        let xpResp = await addXp(localStorage.getItem("id"));
+        console.log("xpresp", xpResp);
         if (resp.completed == true) {
           progress.setAttribute("data-done", resp.timesdone);
           overallProgress.setAttribute(
