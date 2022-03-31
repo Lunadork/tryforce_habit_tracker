@@ -36,8 +36,10 @@ function renderHabits() {
           setTimeout(() => {
             habit.classList.remove("appended");
           }, 250);
+          renderExpIndicator();
           renderExp();
           renderBar();
+          updateExpBar();
           renderOverallTimeout();
         } else {
           let incremented = parseInt(current) + 1;
@@ -45,6 +47,7 @@ function renderHabits() {
           renderExpIndicator();
           renderExp();
           renderBar();
+          updateExpBar();
         }
       } catch (error) {
         Alert("Error", error);
@@ -69,14 +72,17 @@ function renderHabits() {
         }
         if (resp.timesdone == 0) {
           progress.setAttribute("data-done", resp.timesdone);
+          renderExpIndicator();
           renderExp();
           renderBar();
+          updateExpBar();
         } else {
           let incremented = parseInt(current) - 1;
           progress.setAttribute("data-done", incremented);
           renderExpIndicator();
           renderExp();
           renderBar();
+          updateExpBar();
         }
       } catch (error) {
         Alert("Error", error);
