@@ -1,6 +1,6 @@
 let log = "";
 
-const konamiCode = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter";
+const konamiCode = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba";
 const zeldasLullaby = "ArrowLeftArrowUpArrowRightArrowLeftArrowUpArrowRight";
 const eponasSong = "ArrowUpArrowLeftArrowRightArrowUpArrowLeftArrowRight";
 const songOfStorms = "aArrowDownArrowUpaArrowDownArrowUp";
