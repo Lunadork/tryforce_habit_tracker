@@ -12,6 +12,7 @@ function renderHabits() {
 
     renderExp();
     renderBar();
+    renderBarText();
     renderOverall();
 
     let incrementor = habit.firstElementChild.firstElementChild;
@@ -22,6 +23,9 @@ function renderHabits() {
 
     incrementor.addEventListener("click", async () => {
       try {
+        if (habit.getAttribute("completed") == 'true') {
+          return;
+        }
         let current = progress.getAttribute("data-done");
         let resp = await updateHabitTimesDone(habit.id, "increment", localStorage.getItem('id'));
         if (resp.completed == true) {
@@ -38,8 +42,9 @@ function renderHabits() {
           }, 250);
           renderExpIndicator();
           renderExp();
-          renderBar();
           updateExpBar();
+          renderBar();
+          renderBarText();
           renderOverallTimeout();
         } else {
           let incremented = parseInt(current) + 1;
@@ -47,6 +52,7 @@ function renderHabits() {
           renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
           updateExpBar();
         }
       } catch (error) {
@@ -61,6 +67,7 @@ function renderHabits() {
         }
         let resp = await updateHabitTimesDone(habit.id, "decrement", localStorage.getItem('id'));
         if (habit.getAttribute("completed") == "true") {
+          habit.setAttribute("completed", false);
           overallProgress.setAttribute("data-done", 0);
 
           if (habit.parentElement.classList.contains("habits--completed")) {
@@ -78,6 +85,7 @@ function renderHabits() {
           renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
           updateExpBar();
         } else {
           let incremented = parseInt(current) - 1;
@@ -85,6 +93,7 @@ function renderHabits() {
           renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
           updateExpBar();
         }
       } catch (error) {
@@ -113,7 +122,7 @@ function renderHabits() {
       }
     });
 
-    function renderBar() {
+    function renderBarText() {
       progress.style.opacity = 1;
       let currentValue = parseInt(progress.getAttribute("data-done"));
 
