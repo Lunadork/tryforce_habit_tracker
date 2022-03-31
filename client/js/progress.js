@@ -1,40 +1,49 @@
 const progress = document.querySelector(".progress--done");
 let profile = document.querySelector(".profile");
-progress.style.width = progress.getAttribute("data-done") + "%";
 progress.style.opacity = 1;
 let indicator = document.querySelector(".progress--indicator");
 let currentTarget = 100;
-let currentValue = parseInt(progress.getAttribute("data-done"));
+let previousTarget = 0;
+let currentXp = 0;
+let currentLevel = 1;
 
-profile.addEventListener("click", (e) => {
-  let current = progress.getAttribute("data-done");
-  let incremented = parseInt(current) + 5;
-  progress.setAttribute("data-done", incremented);
+function updateExpBar() {
   renderExp();
   renderBar();
-});
+};
 
-function renderBar() {
-  let currentValue = parseInt(progress.getAttribute("data-done"));
-
-  progress.style.width = Math.floor((currentValue / currentTarget) * 100) + "%";
+async function renderBar() {
+  progress.style.width = Math.floor(((currentXp - previousTarget) / (currentTarget - previousTarget)) * 100) + "%";
 }
 
-function renderExp() {
-  let currentValue = parseInt(progress.getAttribute("data-done"));
-  if (currentValue >= currentTarget) {
-    progress.setAttribute("data-done", 0);
-    currentTarget = Math.ceil(currentTarget * 1.5);
-    progress.style.width = 0;
-    return renderExp();
+async function renderExp() {
+    await refreshXp();
+    while (currentXp >= currentTarget) {
+      previousTarget = currentTarget;
+      currentTarget = Math.ceil(currentTarget * 1.5);
+      document.querySelector("#playerLevel").textContent = `Level: ${++currentLevel}`;
+      renderBar();
+      return renderExp();
+    }
+    while (currentXp <= previousTarget) {
+      currentTarget = previousTarget;
+      previousTarget = Math.ceil(currentTarget / 1.5);
+      document.querySelector("#playerLevel").textContent = `Level: ${--currentLevel}`;
+      return renderExp();
+    }
+    indicator.innerHTML = `EXP: ${currentXp}/${currentTarget} (${Math.floor(
+      ((currentXp - previousTarget) / (currentTarget - previousTarget)) * 100
+    )}%)`;
+    renderBar();
   }
-  indicator.innerHTML = `EXP: ${currentValue}/${currentTarget} (${Math.floor(
-    (currentValue / currentTarget) * 100
-  )}%)`;
+
+async function refreshXp() {
+  const userData = await getOne('users', localStorage.getItem('id'));
+  currentXp = userData.xp;
 }
 
 renderExp();
 
-document.querySelector(".btn--log").addEventListener("click", () => {
+document.querySelector(".btn--logOut").addEventListener("click", () => {
   document.location.href = "index.html";
 });

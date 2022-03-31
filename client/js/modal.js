@@ -10,7 +10,7 @@ let imageData = [];
 let selectedImage = 0;
 const id = parseInt(localStorage.getItem("id"));
 
-modalBtn.addEventListener("click", toggleModal);
+modalBtn ? modalBtn.addEventListener("click", toggleModal) : null;
 
 modalClose.addEventListener("click", toggleModal);
 
@@ -82,6 +82,7 @@ async function pageLoad() {
   imageData = await getAllPfps();
   const userData = await getOne("users", id);
   profilePicture.src = imageData.find((e) => e.id == userData.profilepic).src;
+  document.querySelector("#playerName").textContent = userData.username;
 }
 
 pageLoad();
@@ -104,7 +105,7 @@ function toggleForm() {
     <input type="number" class="form--control" name="frequency" id="newHabitFrequency" placeholder="Frequency" />
     <p class="errorText error--time"></p>
 
-    <select class="form--control" name="categories" id="newHabitCategories">
+    <select class="form--control" name="categories" required id="newHabitCategories">
       <option value="" disabled selected>Select Category</option>
       <option value="lifestyle">Lifestyle</option>
       <option value="fitness">Fitness</option>

@@ -23,6 +23,7 @@ async function initLoad() {
         document.querySelector(".habits--container").appendChild(habit);
       }
     });
+
     renderHabits();
   } catch (e) {
     console.log(e);

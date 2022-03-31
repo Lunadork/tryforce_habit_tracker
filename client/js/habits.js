@@ -12,6 +12,14 @@ function renderHabits() {
 
     renderExp();
     renderBar();
+    renderExpIndicator();
+    renderBarText();
+
+    if (habit.getAttribute("completed") == true) {
+      overallProgress.setAttribute("data-done", 1);
+    } else {
+      overallProgress.setAttribute("data-done", 0);
+    }
     renderOverall();
 
     let incrementor = habit.firstElementChild.firstElementChild;
@@ -22,8 +30,11 @@ function renderHabits() {
 
     incrementor.addEventListener("click", async () => {
       try {
+        if (habit.getAttribute("completed") == 'true') {
+          return;
+        }
         let current = progress.getAttribute("data-done");
-        let resp = await updateHabitTimesDone(habit.id, "increment");
+        let resp = await updateHabitTimesDone(habit.id, "increment", localStorage.getItem('id'));
         if (resp.completed == true) {
           progress.setAttribute("data-done", resp.timesdone);
           overallProgress.setAttribute("data-done", 1);
@@ -36,14 +47,20 @@ function renderHabits() {
           setTimeout(() => {
             habit.classList.remove("appended");
           }, 250);
+          renderExpIndicator();
           renderExp();
+          updateExpBar();
           renderBar();
+          renderBarText();
           renderOverallTimeout();
         } else {
           let incremented = parseInt(current) + 1;
           progress.setAttribute("data-done", incremented);
+          renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
+          updateExpBar();
         }
       } catch (error) {
         Alert("Error", error);
@@ -52,8 +69,12 @@ function renderHabits() {
     decrementor.addEventListener("click", async () => {
       try {
         let current = progress.getAttribute("data-done");
-        let resp = await updateHabitTimesDone(habit.id, "decrement");
+        if (current == 0) {
+          return;
+        }
+        let resp = await updateHabitTimesDone(habit.id, "decrement", localStorage.getItem('id'));
         if (habit.getAttribute("completed") == "true") {
+          habit.setAttribute("completed", false);
           overallProgress.setAttribute("data-done", 0);
 
           if (habit.parentElement.classList.contains("habits--completed")) {
@@ -68,13 +89,19 @@ function renderHabits() {
         }
         if (resp.timesdone == 0) {
           progress.setAttribute("data-done", resp.timesdone);
+          renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
+          updateExpBar();
         } else {
           let incremented = parseInt(current) - 1;
           progress.setAttribute("data-done", incremented);
+          renderExpIndicator();
           renderExp();
           renderBar();
+          renderBarText();
+          updateExpBar();
         }
       } catch (error) {
         Alert("Error", error);
@@ -102,7 +129,7 @@ function renderHabits() {
       }
     });
 
-    function renderBar() {
+    function renderBarText() {
       progress.style.opacity = 1;
       let currentValue = parseInt(progress.getAttribute("data-done"));
 
@@ -125,7 +152,8 @@ function renderHabits() {
       }, 100);
     }
 
-    function renderExp() {
+    //this renders the text for the first value 'daily tracker'
+    function renderExpIndicator() {
       let currentValue = parseInt(progress.getAttribute("data-done"));
       indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
         (currentValue / currentTarget) * 100
