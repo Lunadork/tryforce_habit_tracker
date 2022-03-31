@@ -25,3 +25,12 @@ We began by brainstorming all the ideas for the application. We came up with thi
 ## Wins & Challenges
 ### Wins
 ### Challenges
+
+
+
+
+
+# Design docs
+## DB schema
+
+![](GHimages/schema.png)
