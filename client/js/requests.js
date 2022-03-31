@@ -87,13 +87,14 @@ async function deleteHabit(id) {
   }
 }
 
-async function updateHabitTimesDone(id, operation) {
+async function updateHabitTimesDone(id, operation, userid) {
   const options = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       id: id,
       operation: operation,
+      userid: userid
     }),
   };
   const response = await fetch(`${fetchString}/habits/${id}}`, options);

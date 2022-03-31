@@ -5,6 +5,8 @@ progress.style.opacity = 1;
 let indicator = document.querySelector(".progress--indicator");
 let currentTarget = 100;
 let currentValue = parseInt(progress.getAttribute("data-done"));
+let currentXp = 0;
+let currentLevel = 1;
 
 profile.addEventListener("click", (e) => {
   let current = progress.getAttribute("data-done");
@@ -14,23 +16,29 @@ profile.addEventListener("click", (e) => {
   renderBar();
 });
 
-function renderBar() {
+async function renderBar() {
   let currentValue = parseInt(progress.getAttribute("data-done"));
 
   progress.style.width = Math.floor((currentValue / currentTarget) * 100) + "%";
 }
 
-function renderExp() {
-  let currentValue = parseInt(progress.getAttribute("data-done"));
-  if (currentValue >= currentTarget) {
-    progress.setAttribute("data-done", 0);
-    currentTarget = Math.ceil(currentTarget * 1.5);
-    progress.style.width = 0;
-    return renderExp();
+async function renderExp() {
+    await refreshXp();
+    while (currentXp >= currentTarget) {
+      progress.setAttribute("data-done", 0);
+      currentTarget = Math.ceil(currentTarget * 1.5);
+      document.querySelector("#playerLevel").textContent = `Level: ${++currentLevel}`;
+      progress.style.width = 0;
+      return renderExp();
+    }
+    indicator.innerHTML = `EXP: ${currentXp}/${currentTarget} (${Math.floor(
+      (currentXp / currentTarget) * 100
+    )}%)`;
   }
-  indicator.innerHTML = `EXP: ${currentValue}/${currentTarget} (${Math.floor(
-    (currentValue / currentTarget) * 100
-  )}%)`;
+
+async function refreshXp() {
+  const userData = await getOne('users', localStorage.getItem('id'));
+  currentXp = userData.xp;
 }
 
 renderExp();

@@ -23,7 +23,7 @@ function renderHabits() {
     incrementor.addEventListener("click", async () => {
       try {
         let current = progress.getAttribute("data-done");
-        let resp = await updateHabitTimesDone(habit.id, "increment");
+        let resp = await updateHabitTimesDone(habit.id, "increment", localStorage.getItem('id'));
         if (resp.completed == true) {
           progress.setAttribute("data-done", resp.timesdone);
           overallProgress.setAttribute("data-done", 1);
@@ -42,6 +42,7 @@ function renderHabits() {
         } else {
           let incremented = parseInt(current) + 1;
           progress.setAttribute("data-done", incremented);
+          renderExpIndicator();
           renderExp();
           renderBar();
         }
@@ -52,7 +53,7 @@ function renderHabits() {
     decrementor.addEventListener("click", async () => {
       try {
         let current = progress.getAttribute("data-done");
-        let resp = await updateHabitTimesDone(habit.id, "decrement");
+        let resp = await updateHabitTimesDone(habit.id, "decrement", localStorage.getItem('id'));
         if (habit.getAttribute("completed") == "true") {
           overallProgress.setAttribute("data-done", 0);
 
@@ -73,6 +74,7 @@ function renderHabits() {
         } else {
           let incremented = parseInt(current) - 1;
           progress.setAttribute("data-done", incremented);
+          renderExpIndicator();
           renderExp();
           renderBar();
         }
@@ -125,7 +127,7 @@ function renderHabits() {
       }, 100);
     }
 
-    function renderExp() {
+    function renderExpIndicator() {
       let currentValue = parseInt(progress.getAttribute("data-done"));
       indicator.innerHTML = `${currentValue}/${currentTarget} (${Math.floor(
         (currentValue / currentTarget) * 100
