@@ -36,4 +36,4 @@ We began by brainstorming all the ideas for the application. We came up with thi
 ![](GHimages/schema.png)
 
 # Api and server testing %s
-![server testing](GHimages/image (3).png)
+![](GHimages/apitest.png)
