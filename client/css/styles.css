@@ -446,7 +446,7 @@ footer p {
 .habits--container {
   background: rgba(79, 91, 102, 0.8);
   border-radius: 10px;
-  height: 100vh;
+  height: 200vh;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -663,4 +663,30 @@ h3 {
   .options {
     flex-direction: column-reverse;
   }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 400px;
+  background-color: #0d9263;
+  color: #333;
+  text-align: center;
+  border: 1px solid #00381c;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, top 0.2s, visibility 0.2s;
+  padding: 2rem;
+}
+
+.toast--visible {
+  opacity: 1;
+  top: 20px;
+  visibility: visible;
 }

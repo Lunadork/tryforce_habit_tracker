@@ -52,7 +52,7 @@ async function refreshXp() {
     userData.level >
     parseInt(document.querySelector("#playerLevel").textContent)
   ) {
-    alert("level up");
+    Toast.show("Levelled Up");
   }
   currentXp = userData.xp;
   currentTarget = userData.xptarget;
