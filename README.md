@@ -36,4 +36,4 @@ We began by brainstorming all the ideas for the application. We came up with thi
 ![](GHimages/schema.png)
 
 # Api and server testing %s
-!(server testing)(https://files.slack.com/files-pri/THYP60S66-F03A9D9JHBJ/image.png)
+![server testing](https://files.slack.com/files-pri/THYP60S66-F03A9D9JHBJ/image.png)
