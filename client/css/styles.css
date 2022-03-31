@@ -642,3 +642,25 @@ h3 {
 .deleted {
   animation: append-out 0.3s;
 }
+
+.filter {
+  height: 20%;
+  align-self: center;
+  width: 50%;
+}
+
+.hide {
+  display: none;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+@media screen and (max-width: 1000px) {
+  .options {
+    flex-direction: column-reverse;
+  }
+}

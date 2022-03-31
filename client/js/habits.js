@@ -177,3 +177,22 @@ function renderHabits() {
     }
   });
 }
+let btnFilter = document.querySelector(".filter");
+btnFilter.addEventListener("change", (e) => {
+  let allHabits = Array.from(document.querySelectorAll(".habit"));
+
+  allHabits.map((habit) => {
+    if (e.target.value == "all") {
+      habit.style.display = "flex";
+    } else if (
+      habit
+        .getElementsByClassName("habit--description")[0]
+        .textContent.trim()
+        .includes(e.target.value)
+    ) {
+      habit.style.display = "flex";
+    } else {
+      habit.style.display = "none";
+    }
+  });
+});
