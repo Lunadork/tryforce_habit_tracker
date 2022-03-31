@@ -14,6 +14,12 @@ function renderHabits() {
     renderBar();
     renderExpIndicator();
     renderBarText();
+
+    if (habit.getAttribute("completed") == true) {
+      overallProgress.setAttribute("data-done", 1);
+    } else {
+      overallProgress.setAttribute("data-done", 0);
+    }
     renderOverall();
 
     let incrementor = habit.firstElementChild.firstElementChild;
