@@ -14,7 +14,7 @@ modalBtn ? modalBtn.addEventListener("click", toggleModal) : null;
 
 modalClose.addEventListener("click", toggleModal);
 
-modalSubmit.addEventListener("click", submitProfile);
+modalSubmit ? modalSubmit.addEventListener("click", submitProfile) : null;
 
 function toggleModal() {
   document.querySelector(".modal-bg").classList.toggle("bg-active");
@@ -84,12 +84,12 @@ async function pageLoad() {
   profilePicture.src = imageData.find((e) => e.id == userData.profilepic).src;
   document.querySelector("#playerName").textContent = userData.username;
 }
-
-pageLoad();
-
+if (profilePicture) {
+  pageLoad();
+}
 let add = document.querySelector(".btn--add");
 
-add.addEventListener("click", toggleForm);
+add ? add.addEventListener("click", toggleForm) : null;
 
 function toggleForm() {
   const modalHeader =

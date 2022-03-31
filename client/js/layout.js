@@ -1,6 +1,8 @@
 window.onload = initLoad;
 async function initLoad() {
-  document.querySelector(".habits--container").innerHTML = "";
+  let habitsContainer = document.querySelector(".habits--container");
+  habitsContainer ? (habitsContainer.innerHTML = "") : null;
+
   try {
     let data = await getHabitsForUser(localStorage.getItem("id"));
     console.log(data);
