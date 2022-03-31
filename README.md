@@ -42,5 +42,6 @@ We began by brainstorming all the ideas for the application. We came up with thi
 
 Users receive emails from Tingle or Navi if they miss a habit, or hit a streak of 10 for that habit
 
-![](GHImages/forgot.png)
-![](GHImages/streak.png)
+![](GHimages/Forgot.png)
+
+![](GHimages/streak.png)
