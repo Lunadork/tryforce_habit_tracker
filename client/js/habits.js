@@ -56,6 +56,9 @@ function renderHabits() {
     decrementor.addEventListener("click", async () => {
       try {
         let current = progress.getAttribute("data-done");
+        if (current == 0) {
+          return;
+        }
         let resp = await updateHabitTimesDone(habit.id, "decrement", localStorage.getItem('id'));
         if (habit.getAttribute("completed") == "true") {
           overallProgress.setAttribute("data-done", 0);
