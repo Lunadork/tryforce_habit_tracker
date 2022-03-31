@@ -6,12 +6,15 @@ async function initLoad() {
     console.log(data);
     let habits = [];
     data.forEach((habit) => {
+      console.log(`Days Comp: ${habit.dayscompleted}
+      Days Exist: ${habit.daysexist}
+      ${Math.floor((habit.dayscompleted / (habit.daysexist + 1)) * 100)}`);
       let generatedHabit = generateHabit({
         ...habit,
         overall:
           habit.dayscompleted == 0
             ? 0
-            : Math.floor((habit.daysexist + 1) / habit.dayscompleted),
+            : Math.floor((habit.dayscompleted / (habit.daysexist + 1)) * 100),
       });
       habits.push(generatedHabit);
     });
