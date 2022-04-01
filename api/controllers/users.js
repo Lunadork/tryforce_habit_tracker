@@ -41,8 +41,7 @@ async function update(req,res)
 
 async function destroy (req, res) 
 {
-        const user = await User.getById(req.params.id);
-        await user.destroy();
+        await User.destroy(req.params.id);
         res.status(204).end();
 }
 
@@ -99,7 +98,6 @@ async function levelUp(req,res)
 {
     try 
     {
-        console.log(`Updating user ${req.params.id} level to ${parseInt(req.body.level) + 1 }`)
         const user = await User.levelUp(req.params.id);
         res.status(202).json(user);
     }

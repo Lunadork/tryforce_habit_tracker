@@ -9,6 +9,7 @@ router.get('/:id', usersController.getById);
 router.put('/:id',usersController.update);
 router.delete('/:id',usersController.destroy);
 
+
 router.get('/:id/habits', usersController.getHabitsByUserId);
 router.get('/:id/xptarget', usersController.getXpTarget);
 

@@ -15,6 +15,7 @@ async function register(req, res)
 
         if (req.body.password.length < 8 || !validRegex.test(req.body.email) || /@/.test(req.body.username)) {
             console.log("Client overrode client-side register form protection, terminating user registration");
+            res.status(409).send("Password too short!");
             return;
         }
         else if (await User.getByUsername(req.body.username)) {

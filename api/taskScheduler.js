@@ -9,7 +9,6 @@ let streakArray = [];
 let failArray = [];
 
 
-
 async function go()
 {
     console.log("Task scheduler started processing.");
@@ -230,15 +229,16 @@ async function sendFailEmail(habit)
 {
 
     let testAccount = await nodemailer.createTestAccount();
-    let transporter = await nodemailer.createTransport
-    ({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
+    let transporter = await nodemailer.createTransport({
+        host: "smtp.gmail.com", // hostname
+        secureConnection: false,
+        port: 587, // port for secure SMTP
+        requiresAuth: true,
+        domains: ["gmail.com", "googlemail.com"],
         auth: 
         {
-            user: testAccount.user,
-            pass: testAccount.pass
+            user: "tryforceteamnavi@gmail.com",
+            pass: "Futureproof"
         }
     });
 
@@ -249,7 +249,7 @@ async function sendFailEmail(habit)
 
     console.log(`sending email to ${email} now!`);
 
-    let content =  `<!DOCTYPE html>
+    let content =   `<!DOCTYPE html>
 
     <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
     <head>
@@ -511,19 +511,27 @@ async function sendFailEmail(habit)
     </body>
     </html>`;
 
-
+    try
+    {
     let info = await transporter.sendMail({
         from: '"Navi @ Tryforce Team" <tryforceteamnavi@gmail.com>', //sender addy
         to: `${email}`,
         subject: "Hey, Listen!",
         html: content
     });
+    }
+    catch(err)
+    {
+        console.log("Failed to send email:" + err)
+    }
 
-    console.log("Email sent: %s", info.messageId);
+    // console.log("Email sent: %s", info.messageId);
 
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
+    
 
+    return true
 }
 
 async function sendStreakEmail(habit)
@@ -533,13 +541,15 @@ async function sendStreakEmail(habit)
     let testAccount = await nodemailer.createTestAccount();
     let transporter = await nodemailer.createTransport
     ({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
+        host: "smtp.gmail.com", // hostname
+        secureConnection: false,
+        port: 587, // port for secure SMTP
+        requiresAuth: true,
+        domains: ["gmail.com", "googlemail.com"],
         auth: 
         {
-            user: testAccount.user,
-            pass: testAccount.pass
+            user: "tryforceteamnavi@gmail.com",
+            pass: "Futureproof"
         }
     });
 
@@ -550,6 +560,7 @@ async function sendStreakEmail(habit)
 
     console.log(`sending email to ${email} now!`);
 
+    
     let content =  `<!DOCTYPE html>
 
     <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -812,19 +823,24 @@ async function sendStreakEmail(habit)
     </body>
     </html>`;
 
+    try{
+        let info = await transporter.sendMail({
+            from: '"Tingle @ Tryforce Team" <tryforceteamnavi@gmail.com>', //sender addy
+            to: `${email}`,
+            subject: "Tingle, Tingle! Kooloo-Limpah!",
+            html: content
+        });
+    }
+    catch(err)
+    {
+        console.log("Failed to send email:" + err)
+    }
 
-    let info = await transporter.sendMail({
-        from: '"Tingle @ Tryforce Team" <tryforceteamnavi@gmail.com>', //sender addy
-        to: `${email}`,
-        subject: "Tingle, Tingle! Kooloo-Limpah!",
-        html: content
-    });
+    // console.log("Email sent: %s", info.messageId);
 
-    console.log("Email sent: %s", info.messageId);
+    //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-
+    return true;
 }
 
-module.exports = { go, sendEmails  }
+module.exports = { go, sendEmails, sendStreakEmail, sendFailEmail}

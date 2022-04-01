@@ -8,18 +8,29 @@
     "node-cron": "^3.0.0",
     "nodemailer": "^6.7.3",
     "pg": "^8.7.3",
-    "shelljs": "^0.8.5"
+    "shelljs": "^0.8.5",
+    "supertest": "^6.2.2"
   },
   "devDependencies": {
-    "jest": "^26.4.2",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.4"
   },
   "scripts": {
     "start": "node --legacy-watch index.js",
     "dev": "nodemon --legacy-watch index.js",
-    "seedDev": "node dbConfig/seedDev.js"
+    "seedDev": "node dbConfig/seedDev.js",
+    "test": "jest --setupFiles ./tests/integration/config.js --watchAll --detectOpenHandles --runInBand --verbose",
+    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
+    "coverage": "jest --setupFiles ./tests/integration/config.js --detectOpenHandles --runInBand --verbose --coverage"
   },
   "name": "api",
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "version": "1.0.0",
   "main": "index.js",
   "repository": {

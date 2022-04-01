@@ -118,7 +118,7 @@ VALUES
 
 INSERT INTO users (username, email, password, rupees, profilePic, xp, level)
 VALUES
-('Zeiadork','zeiagillies@gmail.com','a',100,2,0,1),
+('Zeiadork','Zeiadork@gmail.com','a',100,2,0,1),
 ('Nottnott','a@a.col','a',200,3,0,1),
 ('Rakib','a@a.cob','a',300,1,0,1);
 
@@ -128,7 +128,7 @@ VALUES
 
 INSERT INTO habits (user_id, title, frequency, streak, category, timesdone, completed, daysexist, dayscompleted)
 VALUES
-(1, 'Do wellness stuff', 4, 2,'Lifestyle', 1, false, 3, 3),
+(1, 'Do wellness stuff', 4, 3,'Lifestyle', 2, false, 3, 3),
 (1, 'Learn python', 1, 0, 'Work', 0, false, 0, 0),
 (1, 'Do weights', 1, 3, 'Fitness', 0, false, 3, 3),
 (2, 'Cardio', 1, 4,'Fitness', 0, false, 5, 4),

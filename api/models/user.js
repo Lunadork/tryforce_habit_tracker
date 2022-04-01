@@ -128,32 +128,32 @@ module.exports = class User
         });
     }
 
-    destroy()
+    static destroy(id)
     {
         return new Promise(async (res, rej) => 
         {
             try 
             {
-                const result = await db.query('DELETE FROM users WHERE id = $1 RETURNING id', [ this.id ]);
+                const result = await db.query('DELETE FROM users WHERE id = $1 RETURNING id', [ id ]);
 
-                const habits = await this.habits;
+                const habits = await db.query('SELECT * FROM habits WHERE user_id = $1', [ id ])
 
                 let idsDeleted = [];
-
-                try
-                {
-                    habits.array.forEach( async (habit) => 
-                    {
-                        idsDeleted.push(habit.title);
-                        await habit.destroy();    
-                    });
+                
+                // try
+                // {
+                //     habits.forEach( async (habit) => 
+                //     {
+                //         idsDeleted.push(habit.title);
+                //         await habit.destroy();    
+                //     });
     
-                    res(`user ${result.id} and habits ${idsDeleted} yeetus deeletus successus`)
-                }
-                catch (err)
-                {
-                    rej('Deleted user but the habits still remain... errored' + err)
-                }
+                //     res(`user ${result.id} and habits ${idsDeleted} yeetus deeletus successus`)
+                // }
+                // catch (err)
+                // {
+                //     rej('Deleted user but the habits still remain... errored' + err)
+                // }
 
             } 
             catch (err) 
@@ -224,8 +224,10 @@ module.exports = class User
         {
             try 
             {
-                let result = await db.query(`SELECT level FROM users WHERE id = $1`,[id] )                
-                let levelup = parseInt(result.rows[0].level) + 1;
+                let result = await db.query(`SELECT level FROM users WHERE id = $1`,[id] )  
+                           
+                let levelup = result.rows[0].level + 1;
+                console.log("updating user to level: " + levelup)   
                 let updateResult = await db.query(`UPDATE users SET level = $1 WHERE id = $2 RETURNING *;`, [ levelup, id ]);
                 res(new User(updateResult.rows[0]));
             } 
@@ -292,6 +294,7 @@ module.exports = class User
             {
                 let result = await db.query('UPDATE users SET rupees = $1 WHERE id = $2;',[newRupees,id])
                 console.log("Updated user " + id + " with 10 more rupees")
+                res("success");
             }
             catch (err)
             {
