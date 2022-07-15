@@ -26,4 +26,4 @@ async function getById(req,res)
     }
 }
 
-module.exports = { getAll, getById } 
+module.exports = { getAll, getById };

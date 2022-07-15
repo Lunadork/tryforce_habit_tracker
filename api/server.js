@@ -22,12 +22,14 @@ const authRoutes = require('./routes/auth');
 const gameRoutes = require('./routes/game');
 const profilePicRoutes = require('./routes/profilePic');
 const itemRoutes = require('./routes/items');
+const achievementRoutes = require('./routes/achievements')
 server.use('/users', usersRoutes);
 server.use('/habits', habitsRoutes);
 server.use('/auth', authRoutes);
 server.use('/game',gameRoutes);
 server.use('/pfp',profilePicRoutes);
 server.use('/items',itemRoutes);
+server.use('/achievements',achievementRoutes);
 
 //Base dir
 server.get('/', (req, res) => res.send('Tryforce Tracker API - by Rakib, Andrew and Zeia'))
