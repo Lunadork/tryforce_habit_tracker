@@ -143,7 +143,8 @@ VALUES
 ('One streak!','/achievements/1streak.png'),
 ('Ten habits!','/achievements/10habits.png');
 
-INSERT INTO items (name,dtext,imgsrc)
+INSERT INTO items (name,dtext,imgsrc,cost)
 VALUES
-('Health potion','Restores HP (not yet)','/items/potion.png'),
-('Heart Container','Levels you up!','/items/heartcontainer.png');
+('Health potion','Restores HP (not yet)','/items/potion.png',10),
+('Test','ZeiaTest','/items/blank.png',10000),
+('Heart Container','Levels you up!','/items/heartcontainer.png',100);

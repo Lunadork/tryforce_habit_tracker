@@ -32,7 +32,9 @@ CREATE TABLE items
     id serial PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     dtext VARCHAR(500) NOT NULL,
-    imgsrc VARCHAR(200) NOT NULL
+    imgsrc VARCHAR(200) NOT NULL,
+    cost int,
+    test int
 );
 
 DROP TABLE IF EXISTS users;

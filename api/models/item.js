@@ -4,8 +4,9 @@ module.exports = class Item {
     constructor(data){
         this.id = data.id;
         this.name = data.name;
-        this.desc = data.desc;
-        this.imgsrc = data.imgsrc
+        this.dtext = data.dtext;
+        this.imgsrc = data.imgsrc;
+        this.cost = data.cost
     }
 
     static get all()
