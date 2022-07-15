@@ -135,3 +135,15 @@ VALUES
 (1, 'Learn something', 1, 9,'Work', 1, true, 6, 5),
 (3, 'Code challenges', 2, 9,'Work', 2, true, 5, 5 );
 
+INSERT INTO achievements (name, imgsrc)
+VALUES
+('Level 10!','/achievements/10.png'),
+('Level 20!','/achievements/20.png'),
+('Level 30!','/achievements/30.png'),
+('One streak!','/achievements/1streak.png'),
+('Ten habits!','/achievements/10habits.png');
+
+INSERT INTO items (name,dtext,imgsrc)
+VALUES
+('Health potion','Restores HP (not yet)','/items/potion.png'),
+('Heart Container','Levels you up!','/items/heartcontainer.png');

@@ -15,6 +15,26 @@ CREATE TABLE profilePics
     src VARCHAR
 );
 
+DROP TABLE IF EXISTS achievements;
+
+CREATE TABLE achievements
+(
+    id serial PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    imgsrc VARCHAR(200) NOT NULL
+
+);
+
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items
+(
+    id serial PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    dtext VARCHAR(500) NOT NULL,
+    imgsrc VARCHAR(200) NOT NULL
+);
+
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users
@@ -28,7 +48,9 @@ CREATE TABLE users
     FOREIGN KEY(profilePic) REFERENCES profilePics(id),
     xp int,
     level int,
-    FOREIGN KEY (level) REFERENCES levels(id)
+    FOREIGN KEY (level) REFERENCES levels(id),
+    achievements int[],
+    items int[]
 );
 
 
@@ -48,3 +70,4 @@ CREATE TABLE habits
     daysexist int,
     dayscompleted int
 );
+
