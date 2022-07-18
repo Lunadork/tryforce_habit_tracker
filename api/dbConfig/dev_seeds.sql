@@ -101,10 +101,6 @@ VALUES
 (17954554),
 (20647737);
 
-
-
-
-
 INSERT INTO profilePics (src)
 VALUES
 ('/images/link.png'),
@@ -113,18 +109,11 @@ VALUES
 ('/images/zeldacdi.jpg'),
 ('/images/morshu.png');
 
-
-
-
-INSERT INTO users (username, email, password, rupees, profilePic, xp, level)
+INSERT INTO users (username, email, password, rupees, profilePic, xp, level, hp, achievements, items)
 VALUES
-('Zeiadork','Zeiadork@gmail.com','a',100,2,0,1),
-('Nottnott','a@a.col','a',200,3,0,1),
-('Rakib','a@a.cob','a',300,1,0,1);
-
-
-
-
+('Zeiadork','Zeiadork@gmail.com','a',100,2,0,1,100,ARRAY[1],ARRAY[0]),
+('Nottnott','a@a.col','a',200,3,0,1,90,ARRAY[1,2],ARRAY[0]),
+('Rakib','a@a.cob','a',300,1,0,1,55,ARRAY[0],ARRAY[0]);
 
 INSERT INTO habits (user_id, title, frequency, streak, category, timesdone, completed, daysexist, dayscompleted)
 VALUES

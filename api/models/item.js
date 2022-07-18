@@ -1,7 +1,9 @@
 const db = require("../dbConfig/init");
 
-module.exports = class Item {
-    constructor(data){
+module.exports = class Item 
+{
+    constructor(data)
+    {
         this.id = data.id;
         this.name = data.name;
         this.dtext = data.dtext;
@@ -26,7 +28,6 @@ module.exports = class Item {
         });
     }
 
-
     static getById(id) 
     {
         return new Promise(async (res, rej) => 
@@ -43,8 +44,5 @@ module.exports = class Item {
             }
         })
     }
-
-
-
 
 }

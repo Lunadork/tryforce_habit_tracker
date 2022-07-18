@@ -16,6 +16,9 @@ module.exports = class User
         this.level = data.level;
         this.xptarget = data.xptarget;
         this.src = data.src;
+        this.hp = data.hp;   
+        this.achievements = data.achievements;
+        this.items = data.items;
     }
 
 
@@ -25,7 +28,7 @@ module.exports = class User
         {
             try 
             {
-                const result = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget 
+                const result = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget, users.hp 
                                                 FROM users 
                                                 INNER JOIN levels 
                                                 ON users.level = levels.id
@@ -48,7 +51,7 @@ module.exports = class User
         {
             try
             {
-                let userData = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget 
+                let userData = await db.query(`SELECT users.id, users.username, users.email, users.rupees, users.profilePic, profilePics.src, users.level, users.xp, levels.xptarget, users.hp 
                                                 FROM users 
                                                 INNER JOIN levels 
                                                 ON users.level = levels.id
@@ -103,21 +106,20 @@ module.exports = class User
     {
         let { username, email, password} = userData;
         let rupees = 0;
-        //profilepic ID must be 1, SQL counting is 1 based, not 0 based!
         let profilePic = 1;
-        //if xp starts out on 0, the clientside starts freaking out in an infinite loop in what otherwise would be perfectly fine code
-        //so start xp at 25 to make life easy :DDD
         let xp = 1;
-        //in the final implementation serverside levels are NOT used. this level attribute is worthless
         let level = 1;
+        let hp = 100;
+        let achievements = [];
+        let items = [];
 
         return new Promise (async (res,rej) => 
         {
             try 
             {
-                let result = await db.query(`INSERT INTO users (username, email, password, rupees, profilePic, xp, level)
-                                                          VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`, 
-                                                          [username, email, password, rupees, profilePic, xp, level])
+                let result = await db.query(`INSERT INTO users (username, email, password, rupees, profilePic, xp, level, hp, achievements, items)
+                                                          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;`, 
+                                                          [username, email, password, rupees, profilePic, xp, level, hp, achievements, items])
                 console.log(`User created with ID: ${result.rows[0].id}`);
                 res(new User(result.rows[0]));
             }

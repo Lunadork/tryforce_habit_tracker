@@ -52,7 +52,8 @@ CREATE TABLE users
     level int,
     FOREIGN KEY (level) REFERENCES levels(id),
     achievements int[],
-    items int[]
+    items int[],
+    hp int
 );
 
 
